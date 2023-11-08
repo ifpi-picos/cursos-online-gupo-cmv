@@ -1,6 +1,6 @@
-package br.edu.ifpi.cadastros;
-import br.edu.ifpi.cadastros.Professor;
-import br.edu.ifpi.cadastros.Aluno;
+package br.edu.ifpi.dao;
+import br.edu.ifpi.dao.Aluno;
+import br.edu.ifpi.dao.Professor;
 
 public class Curso {
 

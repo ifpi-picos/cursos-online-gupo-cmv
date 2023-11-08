@@ -1,7 +1,7 @@
-package br.edu.ifpi.cadastros;
+package br.edu.ifpi.entidades;
 
 public class Professor {
-
+    private int id;
     private String nome;
     private String email;
 
@@ -10,7 +10,17 @@ public class Professor {
         this.email = email;
     }
 
-    public String getnome () {
+    public Professor(int id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public int getid() {
+        return id;
+    }
+
+    public String getnome() {
         return nome;
     }
 
