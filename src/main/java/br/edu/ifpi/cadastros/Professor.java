@@ -1,7 +1,7 @@
 package br.edu.ifpi.cadastros;
 
 public class Professor {
-    
+
     private String nome;
     private String email;
 
