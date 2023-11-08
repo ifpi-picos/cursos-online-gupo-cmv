@@ -3,7 +3,7 @@ import br.edu.ifpi.cadastros.Professor;
 import br.edu.ifpi.cadastros.Aluno;
 
 public class Curso {
-
+    
     private String nome;
     private String status;
     private int cargaHoraria;
