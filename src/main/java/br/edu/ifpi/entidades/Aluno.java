@@ -1,15 +1,20 @@
 package br.edu.ifpi.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
     private int id;
     private String nome;
     private int numeroMatricula;
     private String email;
+        private List<Curso> cursosMatriculados;
 
     public Aluno(String nome, int numeroMatricula, String email) {
         this.nome = nome;
         this.numeroMatricula = numeroMatricula;
         this.email = email;
+           this.cursosMatriculados = new ArrayList<>();
     }
 
     public int getid() {
@@ -34,5 +39,13 @@ public class Aluno {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Curso> getCursosMatriculados() {
+        return cursosMatriculados;
+    }
+
+    public void setCursosMatriculados(List<Curso> cursosMatriculados) {
+        this.cursosMatriculados = cursosMatriculados;
     }
 }
