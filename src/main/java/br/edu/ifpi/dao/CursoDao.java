@@ -1,15 +1,15 @@
 package br.edu.ifpi.dao;
-import br.edu.ifpi.dao.Aluno;
-import br.edu.ifpi.dao.Professor;
+import br.edu.ifpi.dao.AlunoDao;
+import br.edu.ifpi.dao.ProfessorDao;
 
-public class Curso {
+public class CursoDao {
 
     private String nome;
     private String status;
     private int cargaHoraria;
-    private Professor professor;
+    private ProfessorDao professor;
 
-    public Curso(String nome, String status, int cargaHoraria, Professor professor) {
+    public CursoDao(String nome, String status, int cargaHoraria, ProfessorDao professor) {
         this.nome = nome;
         this.status = status;
         this.cargaHoraria = cargaHoraria;
@@ -28,7 +28,7 @@ public class Curso {
         return cargaHoraria;
     }
 
-    public Professor getProfessor() {
+    public ProfessorDao getProfessor() {
         return professor;
     }
 
@@ -44,7 +44,7 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(ProfessorDao professor) {
         this.professor = professor;
     }
 }

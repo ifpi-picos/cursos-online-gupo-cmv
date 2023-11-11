@@ -1,18 +1,16 @@
 package br.edu.ifpi.entidades;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aluno {
     private int id;
     private String nome;
+    private int numeroMatricula;
     private String email;
 
-    public Aluno(String nome, String email) {
+    public Aluno(String nome, int numeroMatricula, String email) {
         this.nome = nome;
-        this.email = email;
-    }
-
-    public Aluno(int id, String nome, String email) {
-        this.id = id;
-        this.nome = nome;
+        this.numeroMatricula = numeroMatricula;
         this.email = email;
     }
 
@@ -20,16 +18,20 @@ public class Aluno {
         return id;
     }
 
-    public String getnome () {
+    public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getNumeroMatricula() {
+        return numeroMatricula;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public void setnome(String nome) {
-        this.nome = nome;
     }
 
     public void setEmail(String email) {
