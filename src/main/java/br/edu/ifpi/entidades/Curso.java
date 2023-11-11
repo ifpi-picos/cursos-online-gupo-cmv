@@ -7,13 +7,11 @@ public class Curso {
     private String nome;
     private String status;
     private int cargaHoraria;
-    private Professor professor;
 
-    public Curso(String nome, String status, int cargaHoraria, Professor professor) {
+    public Curso(String nome, String status, int cargaHoraria) {
         this.nome = nome;
         this.status = status;
         this.cargaHoraria = cargaHoraria;
-        this.professor = professor;
     }
 
     public String getNome() {
@@ -28,9 +26,6 @@ public class Curso {
         return cargaHoraria;
     }
 
-    public Professor getProfessor() {
-        return professor;
-    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -44,7 +39,5 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
+
 }

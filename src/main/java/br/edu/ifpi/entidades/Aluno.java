@@ -1,6 +1,4 @@
 package br.edu.ifpi.entidades;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Aluno {
     private int id;
