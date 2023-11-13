@@ -4,20 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import br.edu.ifpi.dao.AlunoDao;
+import br.edu.ifpi.dao.Conexao;
+import br.edu.ifpi.dao.ProfessorDao;
+import br.edu.ifpi.entidades.Aluno;
+import br.edu.ifpi.entidades.Professor;
+
 public class App {
     public static void main(String[] args) {
-        try {
-            Connection conexao = DriverManager.getConnection("jdbc:postgresql://sistacademico.c0h7tl22thbg.sa-east-1.rds.amazonaws.com:5432/sistacademico", "postgres", "AgoraFudeu-123");
+        ProfessorDao professorDao = new ProfessorDao(Conexao.getConexao());
+        AlunoDao alunoDao = new AlunoDao(Conexao.getConexao());
+        
+        Professor professor1 = new Professor("Jesiel", "vianajesiel@gmail.com");
+        Professor professor2 = new Professor("João Paulo", "paulojoao@gmail.com");
+        
+        Aluno victor = new Aluno("Victor", 20232424, "limavictor@gmail.com");
 
-            if(conexao != null) {
-                System.out.println("Conexão realizada com sucesso!");
-            } else {
-                System.out.println("Conexão não realizada!");
-            }
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        alunoDao.cadastrar(victor);
     }
 }

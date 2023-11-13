@@ -14,11 +14,11 @@ public class Professor {
         this.cursosMinistrados = new ArrayList<>();
     }
 
-    public int getid() {
+    public int getId() {
         return id;
     }
 
-    public String getnome() {
+    public String getNome() {
         return nome;
     }
 
@@ -26,7 +26,7 @@ public class Professor {
         return email;
     }
 
-    public void setnome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -41,4 +41,6 @@ public class Professor {
     public void setCursosMinistrados(List<Curso> cursosMinistrados) {
         this.cursosMinistrados = cursosMinistrados;
     }
+
+
 }
