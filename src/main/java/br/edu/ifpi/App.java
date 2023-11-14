@@ -19,9 +19,12 @@ public class App {
         CursoDao cursoDao = new CursoDao(Conexao.getConexao());
 
         Professor professor23 = new Professor("João", "joazao@gmail.com");  
-        Curso curso = new Curso("Javaaaa", "Ativo", 40, professor23);
+        Curso curso = new Curso("Javaaaa", "Trancado", 40, professor23);
+        Aluno aluno = new Aluno("carl", 489384983, "carfd@gmail.com");
+        Aluno aluno2 = new Aluno("carl", 489384983, "jdvjd@gmail.com");
 
         cursoDao.cadastrar(curso);
+        cursoDao.exibir();
            
     }
 }

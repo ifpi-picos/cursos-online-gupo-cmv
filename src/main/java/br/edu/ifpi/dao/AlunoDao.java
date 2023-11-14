@@ -62,4 +62,5 @@ public class AlunoDao implements Dao<Aluno>{
             System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
     }
+
 }
