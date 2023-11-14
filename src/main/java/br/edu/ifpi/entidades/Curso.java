@@ -2,7 +2,7 @@ package br.edu.ifpi.entidades;
 
 
 public class Curso {
-
+private int id;
     private String nome;
     private String status;
     private int cargaHoraria;
@@ -14,13 +14,10 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
         this.professor = professor;
     }
+    public int getId() {
+        return id;
+    }
 
-    public Professor getProfessor() {
-        return professor;
-    }
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
 
     public String getNome() {
         return nome;
@@ -45,6 +42,16 @@ public class Curso {
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
+    }
+    public void setId(int idCursoGerado) {
+    }
+    
+ public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
 }

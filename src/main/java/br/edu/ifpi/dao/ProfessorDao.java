@@ -1,9 +1,11 @@
 package br.edu.ifpi.dao;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import br.edu.ifpi.entidades.Professor;
 
 public class ProfessorDao implements Dao<Professor> {
@@ -26,7 +28,8 @@ public class ProfessorDao implements Dao<Professor> {
 
       int row = stm.executeUpdate();
 
-      System.out.println(row);
+      // rows affected
+      System.out.println(row); // 1
       return row;
 
     } catch (SQLException e) {
@@ -39,7 +42,7 @@ public class ProfessorDao implements Dao<Professor> {
     return 0;
   }
 
-  @Override
+    @Override
   public void exibir(){
     String sql = "SELECT * FROM PROFESSOR";
 
@@ -59,4 +62,7 @@ public class ProfessorDao implements Dao<Professor> {
         System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
     }
   }
+
 }
+
+ 
