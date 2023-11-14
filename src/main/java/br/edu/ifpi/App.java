@@ -15,11 +15,5 @@ public class App {
         ProfessorDao professorDao = new ProfessorDao(Conexao.getConexao());
         AlunoDao alunoDao = new AlunoDao(Conexao.getConexao());
         
-        Professor professor1 = new Professor("Jesiel", "vianajesiel@gmail.com");
-        Professor professor2 = new Professor("João Paulo", "paulojoao@gmail.com");
-        
-        Aluno victor = new Aluno("Victor", 20232424, "limavictor@gmail.com");
-
-        alunoDao.cadastrar(victor);
     }
 }

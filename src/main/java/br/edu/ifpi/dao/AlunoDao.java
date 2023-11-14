@@ -1,8 +1,8 @@
 package br.edu.ifpi.dao;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.edu.ifpi.entidades.Aluno;
@@ -28,8 +28,7 @@ public class AlunoDao implements Dao<Aluno>{
 
             int row = stm.executeUpdate();
 
-            // rows affected
-            System.out.println(row); // 1
+            System.out.println(row);
             return row;
 
         } catch (SQLException e) {
@@ -42,4 +41,25 @@ public class AlunoDao implements Dao<Aluno>{
         return 0;
     }
     
+    @Override
+    public void exibir(){
+        String sql = "SELECT * FROM ALUNO";
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            ResultSet resultSet = stm.executeQuery();
+
+            System.out.println("\n----- Lista de alunos -----");
+            while (resultSet.next()) {
+                int idAluno = resultSet.getInt("ID_ALUNO");
+                String nome = resultSet.getString("NOME_ALUNO");
+                String email = resultSet.getString("EMAIL_ALUNO");
+                int matricula = resultSet.getInt("MATRICULA_ALUNO");
+
+                System.out.println(idAluno + " | " + nome + " | " + email + " | " + matricula);
+            }
+        } catch (SQLException e) {
+            System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+    }
 }
