@@ -1,5 +1,5 @@
 package br.edu.ifpi;
-
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,6 +17,9 @@ public class App {
         ProfessorDao professorDao = new ProfessorDao(Conexao.getConexao());
         AlunoDao alunoDao = new AlunoDao(Conexao.getConexao());
         CursoDao cursoDao = new CursoDao(Conexao.getConexao());
+        String nome = JOptionPane.showInputDialog("Nome: ");
+        String email = JOptionPane.showInputDialog("Email: ");
+        
 
         Professor professor23 = new Professor("João", "joazao@gmail.com");  
         Curso curso = new Curso("Javaaaa", "Ativo", 40, professor23);
