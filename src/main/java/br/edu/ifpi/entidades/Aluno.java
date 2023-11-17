@@ -1,20 +1,25 @@
 package br.edu.ifpi.entidades;
-
-import java.util.ArrayList;
-import java.util.List;
+import br.edu.ifpi.enums.StatusAluno;
 
 public class Aluno {
     private int id;
     private String nome;
-    private int numeroMatricula;
     private String email;
-        private List<Curso> cursosMatriculados;
+    private StatusAluno status;
 
-    public Aluno(String nome, int numeroMatricula, String email) {
+    public Aluno(int id ,String nome, String email, StatusAluno status) {
+        this.id = id;
         this.nome = nome;
-        this.numeroMatricula = numeroMatricula;
         this.email = email;
-           this.cursosMatriculados = new ArrayList<>();
+        this.status = status;
+       
+    }
+
+
+    public Aluno(String nome, String email, StatusAluno status) {
+        this.nome = nome;
+        this.email = email;
+        this.status = status;
     }
 
     public int getid() {
@@ -29,10 +34,6 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public int getNumeroMatricula() {
-        return numeroMatricula;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -41,11 +42,14 @@ public class Aluno {
         this.email = email;
     }
 
-    public List<Curso> getCursosMatriculados() {
-        return cursosMatriculados;
+
+    public String getStatus() {
+        return this.status == StatusAluno.ATIVO? "ATIVO" : "INATIVO";    
     }
 
-    public void setCursosMatriculados(List<Curso> cursosMatriculados) {
-        this.cursosMatriculados = cursosMatriculados;
+    public void setStatus(StatusAluno status) {
+        this.status = status;
     }
+
+    
 }

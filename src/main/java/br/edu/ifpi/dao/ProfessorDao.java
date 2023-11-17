@@ -27,6 +27,7 @@ public class ProfessorDao implements Dao<Professor> {
       stm.setString(2, professor.getEmail());
 
       int row = stm.executeUpdate();
+      System.err.println(row);
 
       // rows affected
       System.out.println(row); // 1
@@ -42,26 +43,25 @@ public class ProfessorDao implements Dao<Professor> {
     return 0;
   }
 
-    @Override
-  public void exibir(){
-    String sql = "SELECT * FROM PROFESSOR";
-
-    try {
-        PreparedStatement stm = conexao.prepareStatement(sql);
-        ResultSet resultSet = stm.executeQuery();
-
-        System.out.println("\n----- Lista de professores -----");
-        while (resultSet.next()) {
-            int idProfessor = resultSet.getInt("ID_PROFESSOR");
-            String nome = resultSet.getString("NOME_PROFESSOR");
-            String email = resultSet.getString("EMAIL_PROFESSOR");
-
-            System.out.println(idProfessor + " | " + nome + " | " + email);
-        }
-    } catch (SQLException e) {
-        System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-    }
+  @Override
+  public List<Professor> consultar() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'consultar'");
   }
+
+  @Override
+  public int remover(Professor entidade) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'remover'");
+  }
+
+  @Override
+  public int alterar(Professor entidade) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+  }
+
+    
 
 }
 

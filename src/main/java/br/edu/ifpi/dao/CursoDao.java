@@ -7,14 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import br.edu.ifpi.entidades.Curso;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class CursoDao implements Dao<Curso> {
 
-  private Connection conexao;
+    private Connection conexao;
 
-  public CursoDao(Connection conexao) {
-    this.conexao = conexao;
-  }
+    public CursoDao(Connection conexao) {
+        this.conexao = conexao;
+    }
 
     @Override
     public int cadastrar(Curso curso) {
@@ -23,7 +24,6 @@ public class CursoDao implements Dao<Curso> {
         try {
             PreparedStatement statement = conexao.prepareStatement(sql);
             statement.setString(1, curso.getNome());
-            statement.setString(2, curso.getStatus());
             statement.setInt(3, curso.getCargaHoraria());
             statement.setInt(4, curso.getProfessor().getId());
             return statement.executeUpdate();
@@ -38,26 +38,40 @@ public class CursoDao implements Dao<Curso> {
         return 0;
     }
 
-        @Override
-  public void exibir(){
-    String sql = "SELECT * FROM CURSO";
+    @Override
+    public List<Curso> consultar() {
+        String sql = "SELECT * FROM curso";
 
-    try {
-        PreparedStatement stm = conexao.prepareStatement(sql);
-        ResultSet resultSet = stm.executeQuery();
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            ResultSet resultSet = stm.executeQuery();
 
-        System.out.println("\n----- Lista de cursos -----");
-        while (resultSet.next()) {
-            int idcurso = resultSet.getInt("ID_curso");
-            String nome = resultSet.getString("NOME_CURSO");
-            String status = resultSet.getString("STATUS");
-            int cargaHoraria = resultSet.getInt("CARGAHORARIA");
-            int idProfessor = resultSet.getInt("PROFESSOR_ID");
+            System.out.println("\n----- Lista de cursos -----");
+            while (resultSet.next()) {
+                int idcurso = resultSet.getInt("id_curso");
+                String nome = resultSet.getString("nome_curso");
+                String status = resultSet.getString("status");
+                int cargaHoraria = resultSet.getInt("CARGAHORARIA");
+                int idProfessor = resultSet.getInt("PROFESSOR_ID");
 
-            System.out.println(idcurso + " | " + nome + " | " + status + " | " + cargaHoraria + " | " + idProfessor);
+                System.out
+                        .println(idcurso + " | " + nome + " | " + status + " | " + cargaHoraria + " | " + idProfessor);
+            }
+        } catch (SQLException e) {
+            System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
-    } catch (SQLException e) {
-        System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        return null;
     }
-  }
+
+    @Override
+    public int remover(Curso entidade) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+    }
+
+    @Override
+    public int alterar(Curso entidade) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    }
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import br.edu.ifpi.entidades.Aluno;
 
@@ -17,14 +18,14 @@ public class AlunoDao implements Dao<Aluno>{
 
     @Override
     public int cadastrar(Aluno aluno) {
-        String sql = "INSERT INTO aluno (nome_aluno, email_aluno, matricula_aluno) VALUES (?,?,?)";
+        String sql = "INSERT INTO aluno (nome, email, status) VALUES (?,?,?)";
 
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
 
             stm.setString(1, aluno.getNome());
             stm.setString(2, aluno.getEmail());
-            stm.setInt(3, aluno.getNumeroMatricula());
+            stm.setString(3, aluno.getStatus());
 
             int row = stm.executeUpdate();
 
@@ -40,10 +41,23 @@ public class AlunoDao implements Dao<Aluno>{
         }
         return 0;
     }
-    
+
     @Override
-    public void exibir(){
-        String sql = "SELECT * FROM ALUNO";
+    public int remover(Aluno entidade) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+    }
+
+    @Override
+    public int alterar(Aluno entidade) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    }
+
+    @Override
+    public List<Aluno> consultar() {
+
+         String sql = "SELECT * FROM aluno";
 
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
@@ -51,16 +65,17 @@ public class AlunoDao implements Dao<Aluno>{
 
             System.out.println("\n----- Lista de alunos -----");
             while (resultSet.next()) {
-                int idAluno = resultSet.getInt("ID_ALUNO");
-                String nome = resultSet.getString("NOME_ALUNO");
-                String email = resultSet.getString("EMAIL_ALUNO");
-                int matricula = resultSet.getInt("MATRICULA_ALUNO");
+                int idAluno = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+                String status = resultSet.getString("status");
 
-                System.out.println(idAluno + " | " + nome + " | " + email + " | " + matricula);
+                System.out.println(idAluno + " | " + nome + " | " + email + " | " + status);
             }
         } catch (SQLException e) {
-            System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            System.err.format("Erro ao listar os alunos. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
+        return null;
     }
 
 }
