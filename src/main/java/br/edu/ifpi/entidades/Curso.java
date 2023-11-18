@@ -9,6 +9,14 @@ public class Curso {
     private int cargaHoraria;
     private Professor professor;
 
+    public Curso(int id, String nome, StatusCurso status, int cargaHoraria, Professor professor) {
+        this.id = id;
+        this.nome = nome;
+        this.status = status;
+        this.cargaHoraria = cargaHoraria;
+        this.professor = professor;
+    }
+
 
     public Curso(String nome, StatusCurso status, int cargaHoraria, Professor professor) {
         this.nome = nome;

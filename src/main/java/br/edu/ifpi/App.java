@@ -12,27 +12,28 @@ import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 
-public class App {
+public class App { // o error do codigo esta aqui
+                    // O erro esta na classe App, pois ela não está instanciando os objetos corretamente.
+
     public static void main(String[] args) {
-       try{
-           AlunoDao alunoDao = new AlunoDao(Conexao.getConnection());
-           Aluno aluno = new Aluno("Matheus", "victor@gmai.com", StatusAluno.ATIVO);
-           alunoDao.cadastrar(aluno);
-           alunoDao.consultar();
-           Aluno aluno2 = new Aluno("Carlos","viadinho@gmail.com", StatusAluno.INATIVO);
-           alunoDao.cadastrar(aluno2);
-           alunoDao.consultar();
-           aluno2.setNome("Carlos");
-           System.out.println(aluno2.getid());
+    try {
+        AlunoDao alunoDao = new AlunoDao(Conexao.getConnection());
+        CursoDao cursoDao = new CursoDao(Conexao.getConnection());
+        ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
 
-       }catch(SQLException e){
-           e.printStackTrace();
-       }
-       
+        Aluno aluno = new Aluno("Matheus", "victor@gmai.com", StatusAluno.ATIVO);
+        alunoDao.cadastrar(aluno);
+        alunoDao.consultar();
 
-        
+        Aluno aluno2 = new Aluno("Carlos", "viadinho@gmail.com", StatusAluno.INATIVO);
+        alunoDao.cadastrar(aluno2);
+        alunoDao.consultar();
 
-
-           
+        // Obtém o ID do aluno
+        int idAluno = alunoDao.getId(aluno);
+        System.out.println("ID do aluno: " + idAluno);
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
 }

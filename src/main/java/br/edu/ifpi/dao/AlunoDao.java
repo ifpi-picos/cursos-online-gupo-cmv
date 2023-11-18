@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifpi.entidades.Aluno;
+import br.edu.ifpi.enums.StatusAluno;
 
 public class AlunoDao implements Dao<Aluno>{
     
@@ -57,25 +59,35 @@ public class AlunoDao implements Dao<Aluno>{
     @Override
     public List<Aluno> consultar() {
 
-         String sql = "SELECT * FROM aluno";
-
+        String sql = "SELECT * FROM aluno";
+        ArrayList<Aluno> alunos = new ArrayList<>();
+    
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
             ResultSet resultSet = stm.executeQuery();
-
+    
             System.out.println("\n----- Lista de alunos -----");
             while (resultSet.next()) {
                 int idAluno = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String status = resultSet.getString("status");
-
-                System.out.println(idAluno + " | " + nome + " | " + email + " | " + status);
+    
+                Aluno aluno = new Aluno(idAluno,nome, email, null);
+                alunos.add(aluno);
+                System.out.println(aluno);
+                System.out.println(idAluno + " | " + nome + " | " + email + " | " + status);//Aqui ta certo o erro é no App.java
+    
             }
         } catch (SQLException e) {
             System.err.format("Erro ao listar os alunos. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
-        return null;
+    
+        return alunos;
     }
 
+    public int getId(Aluno aluno) {
+        return 0;
+    }
+    
 }

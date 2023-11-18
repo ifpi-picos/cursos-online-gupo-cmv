@@ -2,13 +2,13 @@ package br.edu.ifpi.entidades;
 import br.edu.ifpi.enums.StatusAluno;
 
 public class Aluno {
-    private int id;
+    private int idAluno;
     private String nome;
     private String email;
     private StatusAluno status;
 
-    public Aluno(int id ,String nome, String email, StatusAluno status) {
-        this.id = id;
+    public Aluno(int idAluno ,String nome, String email, StatusAluno status) {
+        this.idAluno = idAluno;
         this.nome = nome;
         this.email = email;
         this.status = status;
@@ -22,8 +22,9 @@ public class Aluno {
         this.status = status;
     }
 
+
     public int getid() {
-        return id;
+        return idAluno;
     }
 
     public String getNome() {
@@ -49,6 +50,10 @@ public class Aluno {
 
     public void setStatus(StatusAluno status) {
         this.status = status;
+    }
+
+
+    public void setId(int idAluno2) {
     }
 
     
