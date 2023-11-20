@@ -55,7 +55,8 @@ public class CursoDao implements Dao<Curso> {
                 int cargaHoraria = resultSet.getInt("CARGA_HORARIA");
                 int idProfessor = resultSet.getInt("ID_PROFESSOR");
 
-                System.out.println(idcurso + " | " + nome + " | " + status + " | " + cargaHoraria + " | " + idProfessor);
+                System.out
+                        .println(idcurso + " | " + nome + " | " + status + " | " + cargaHoraria + " | " + idProfessor);
             }
         } catch (SQLException e) {
             System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -93,7 +94,41 @@ public class CursoDao implements Dao<Curso> {
 
     @Override
     public int alterar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+        CursoDao cursoDao = new CursoDao(conexao);
+        cursoDao.consultar();
+
+        System.out.println("\nDigite o ID do curso que deseja alterar:");
+        Scanner scanner = new Scanner(System.in);
+        int idCurso = scanner.nextInt();
+        System.out.println("\nDigite o novo nome do curso:");
+        String nome = scanner.next();
+        System.out.println("\nDigite a nova carga horária do curso:");
+        int cargaHoraria = scanner.nextInt();
+        System.out.println("\nDigite o novo status do curso:");
+        String status = scanner.next();
+        System.out.println("\nDigite o novo ID do professor do curso:");
+        int idProfessor = scanner.nextInt();
+
+        String sql = "UPDATE curso SET nome = ?, status = ?, carga_horaria = ?, id_professor = ? WHERE id = ?";
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            stm.setString(1, nome);
+            stm.setString(2, status);
+            stm.setInt(3, cargaHoraria);
+            stm.setInt(4, idProfessor);
+            stm.setInt(5, idCurso);
+
+            int row = stm.executeUpdate();
+            System.out.println(row);
+            return row;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
     }
 }

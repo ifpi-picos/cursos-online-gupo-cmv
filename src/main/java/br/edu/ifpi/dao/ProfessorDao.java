@@ -100,8 +100,38 @@ public class ProfessorDao implements Dao<Professor> {
 
   @Override
   public int alterar() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    ProfessorDao professorDao = new ProfessorDao(conexao);
+    professorDao.consultar();
+
+    System.out.println("\nDigite o ID do professor que deseja alterar:");
+    Scanner scanner = new Scanner(System.in);
+    int idProfessor = scanner.nextInt();
+
+    System.out.println("\nDigite o novo nome do professor:");
+    String nome = scanner.next();
+    System.out.println("\nDigite o novo email do professor:");
+    String email = scanner.next();
+
+    String sql = "UPDATE professor SET nome = ?, email = ? WHERE id = ?";
+    try {
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setString(1, nome);
+        stm.setString(2, email);
+        stm.setInt(3, idProfessor);
+
+        int row = stm.executeUpdate();
+        System.out.println(row);
+
+        return row;
+
+    } catch (SQLException e) {
+        System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+    } catch (Exception e) {
+        e.printStackTrace();
+
+    }
+    return 0;
   }
 
 }
