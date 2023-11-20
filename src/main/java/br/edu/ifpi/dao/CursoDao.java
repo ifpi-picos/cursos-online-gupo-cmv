@@ -100,26 +100,32 @@ public class CursoDao implements Dao<Curso> {
         System.out.println("\nDigite o ID do curso que deseja alterar:");
         Scanner scanner = new Scanner(System.in);
         int idCurso = scanner.nextInt();
-        System.out.println("\nDigite o novo nome do curso:");
-        String nome = scanner.next();
-        System.out.println("\nDigite a nova carga horária do curso:");
-        int cargaHoraria = scanner.nextInt();
-        System.out.println("\nDigite o novo status do curso:");
-        String status = scanner.next();
-        System.out.println("\nDigite o novo ID do professor do curso:");
-        int idProfessor = scanner.nextInt();
 
-        String sql = "UPDATE curso SET nome = ?, status = ?, carga_horaria = ?, id_professor = ? WHERE id = ?";
+        String[] colunas = { "nome", "carga_horaria", "status", "id_professor"};
+
+        for (int i = 0; i < colunas.length; i++) {
+            System.out.println("\nDeseja alterar o " + colunas[i] + " do curso? (s/n)");
+            String valor = scanner.next();
+
+            if (valor.equals("s")) {
+                System.out.println("\nDigite o novo " + colunas[i] + " do curso:");
+                valor = scanner.next();
+                colunas[i] = valor;
+            }
+        }
+
+        String sql = "UPDATE curso SET nome = COALESCE(?, nome), carga_horaria = COALESCE(?, carga_horaria), status = COALESCE(?, status), id_professor = COALESCE(?, id_professor) WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-            stm.setString(1, nome);
-            stm.setString(2, status);
-            stm.setInt(3, cargaHoraria);
-            stm.setInt(4, idProfessor);
+            stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
+            stm.setString(2, colunas[1].equals("carga_horaria") ? null : colunas[1]);
+            stm.setString(3, colunas[2].equals("status") ? null : colunas[2]);
+            stm.setString(4, colunas[3].equals("id_professor") ? null : colunas[3]);
             stm.setInt(5, idCurso);
 
             int row = stm.executeUpdate();
             System.out.println(row);
+
             return row;
 
         } catch (SQLException e) {

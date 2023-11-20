@@ -12,7 +12,6 @@ import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 import java.util.Scanner;
 
-
 /*
 1. Implementar uma dinâmica de não alteração de informações no banco de dados caso o ususário não queira alterá-las.
 2. Implementar um for que percorra as colunas de uma tabela para evitar repetição de códigos no método de alteração.
@@ -20,7 +19,7 @@ import java.util.Scanner;
     * Cursos e professores;
     * Alunos, cursos e notas (+ média);
 4. Sistema de autenticação e permissão de usuários.
- */
+*/
 
 public class App {
     public static void main(String[] args) {
@@ -37,10 +36,11 @@ public class App {
             // professorDao.cadastrar(professor);
             // cursoDao.cadastrar(curso);
 
-            cursoDao.alterar();
+            professorDao.alterar();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+

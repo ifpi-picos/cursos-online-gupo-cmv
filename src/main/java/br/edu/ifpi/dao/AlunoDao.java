@@ -111,24 +111,30 @@ public class AlunoDao implements Dao<Aluno> {
         Scanner scanner = new Scanner(System.in);
         int idAluno = scanner.nextInt();
 
-        System.out.println("\nDigite o novo nome do aluno:");
-        String nome = scanner.next();
-        System.out.println("\nDigite o novo email do aluno:");
-        String email = scanner.next();
-        System.out.println("\nDigite o novo status do aluno:");
-        String status = scanner.next();
+        String[] colunas = { "nome", "email", "status" };
 
-        String sql = "UPDATE aluno SET nome = ?, email = ?, status = ? WHERE id = ?";
+        for (int i = 0; i < colunas.length; i++) {
+            System.out.println("\nDeseja alterar o " + colunas[i] + " do aluno? (s/n)");
+            String valor = scanner.next();
 
+            if (valor.equals("s")) {
+                System.out.println("\nDigite o novo " + colunas[i] + " do aluno:");
+                valor = scanner.next();
+                colunas[i] = valor;
+            }
+        }
+
+        String sql = "UPDATE professor SET nome = COALESCE(?, nome), email = COALESCE(?, email), status = COALESCE(?, status) WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-            stm.setString(1, nome);
-            stm.setString(2, email);
-            stm.setString(3, status);
+            stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
+            stm.setString(2, colunas[1].equals("email") ? null : colunas[1]);
+            stm.setString(3, colunas[2].equals("status") ? null : colunas[2]);
             stm.setInt(4, idAluno);
 
             int row = stm.executeUpdate();
             System.out.println(row);
+
             return row;
 
         } catch (SQLException e) {

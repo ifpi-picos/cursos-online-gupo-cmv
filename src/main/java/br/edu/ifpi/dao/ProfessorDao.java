@@ -81,18 +81,18 @@ public class ProfessorDao implements Dao<Professor> {
     String sql = "DELETE FROM professor WHERE id = ?";
 
     try {
-        PreparedStatement stm = conexao.prepareStatement(sql);
-        stm.setInt(1, idProfessor);
+      PreparedStatement stm = conexao.prepareStatement(sql);
+      stm.setInt(1, idProfessor);
 
-        int row = stm.executeUpdate();
-        System.out.println(row);
-        return row;
+      int row = stm.executeUpdate();
+      System.out.println(row);
+      return row;
 
     } catch (SQLException e) {
-        System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+      System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 
     } catch (Exception e) {
-        e.printStackTrace();
+      e.printStackTrace();
 
     }
     return 0;
@@ -107,28 +107,36 @@ public class ProfessorDao implements Dao<Professor> {
     Scanner scanner = new Scanner(System.in);
     int idProfessor = scanner.nextInt();
 
-    System.out.println("\nDigite o novo nome do professor:");
-    String nome = scanner.next();
-    System.out.println("\nDigite o novo email do professor:");
-    String email = scanner.next();
+    String[] colunas = { "nome", "email" };
 
-    String sql = "UPDATE professor SET nome = ?, email = ? WHERE id = ?";
+    for (int i = 0; i < colunas.length; i++) {
+      System.out.println("\nDeseja alterar o " + colunas[i] + " do professor? (s/n)");
+      String valor = scanner.next();
+
+      if (valor.equals("s")) {
+        System.out.println("\nDigite o novo " + colunas[i] + " do professor:");
+        valor = scanner.next();
+        colunas[i] = valor;
+      }
+    }
+
+    String sql = "UPDATE professor SET nome = COALESCE(?, nome), email = COALESCE(?, email) WHERE id = ?";
     try {
-        PreparedStatement stm = conexao.prepareStatement(sql);
-        stm.setString(1, nome);
-        stm.setString(2, email);
-        stm.setInt(3, idProfessor);
+      PreparedStatement stm = conexao.prepareStatement(sql);
+      stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
+      stm.setString(2, colunas[1].equals("email") ? null : colunas[1]);
+      stm.setInt(3, idProfessor);
 
-        int row = stm.executeUpdate();
-        System.out.println(row);
+      int row = stm.executeUpdate();
+      System.out.println(row);
 
-        return row;
+      return row;
 
     } catch (SQLException e) {
-        System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+      System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 
     } catch (Exception e) {
-        e.printStackTrace();
+      e.printStackTrace();
 
     }
     return 0;
