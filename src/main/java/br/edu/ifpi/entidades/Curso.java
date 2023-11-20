@@ -33,8 +33,8 @@ public class Curso {
         return nome;
     }
 
-    public StatusCurso getStatusCurso() {
-        return status;
+    public String getStatusCurso() {
+        return this.status == StatusCurso.ABERTO? "ABERTO" : "FECHADO";
     }
 
     public int getCargaHoraria() {

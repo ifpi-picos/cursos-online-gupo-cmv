@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import br.edu.ifpi.entidades.Aluno;
-import br.edu.ifpi.enums.StatusAluno;
 
-public class AlunoDao implements Dao<Aluno>{
-    
+public class AlunoDao implements Dao<Aluno> {
+
     private Connection conexao;
 
     public AlunoDao(Connection conexao) {
@@ -45,49 +45,66 @@ public class AlunoDao implements Dao<Aluno>{
     }
 
     @Override
-    public int remover(Aluno entidade) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
-    }
-
-    @Override
-    public int alterar(Aluno entidade) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
-    }
-
-    @Override
     public List<Aluno> consultar() {
 
         String sql = "SELECT * FROM aluno";
         ArrayList<Aluno> alunos = new ArrayList<>();
-    
+
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
             ResultSet resultSet = stm.executeQuery();
-    
+
             System.out.println("\n----- Lista de alunos -----");
             while (resultSet.next()) {
                 int idAluno = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String status = resultSet.getString("status");
-    
-                Aluno aluno = new Aluno(idAluno,nome, email, null);
+
+                Aluno aluno = new Aluno(idAluno, nome, email, null);
                 alunos.add(aluno);
                 System.out.println(aluno);
-                System.out.println(idAluno + " | " + nome + " | " + email + " | " + status);//Aqui ta certo o erro é no App.java
-    
+                System.out.println(idAluno + " | " + nome + " | " + email + " | " + status);
+
             }
         } catch (SQLException e) {
             System.err.format("Erro ao listar os alunos. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
-    
+
         return alunos;
     }
 
-    public int getId(Aluno aluno) {
+    @Override
+    public int remover() {
+        AlunoDao alunoDao = new AlunoDao(conexao);
+        alunoDao.consultar();
+
+        System.out.println("\nDigite o ID do aluno que deseja remover:");
+        Scanner scanner = new Scanner(System.in);
+        int idAluno = scanner.nextInt();
+
+        String sql = "DELETE FROM aluno WHERE id = ?";
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            stm.setInt(1, idAluno);
+
+            int row = stm.executeUpdate();
+            System.out.println(row);
+            return row;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
         return 0;
     }
-    
+
+    @Override
+    public int alterar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+    }
 }

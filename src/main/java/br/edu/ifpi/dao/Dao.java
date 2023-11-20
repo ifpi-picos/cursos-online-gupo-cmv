@@ -7,8 +7,8 @@ public interface Dao<t> {
     
     public List<t> consultar();
 
-    public int remover(t entidade); 
+    public int remover(); 
 
-    public int alterar(t entidade);
+    public int alterar();
     
 } 
