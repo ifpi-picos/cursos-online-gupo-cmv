@@ -47,7 +47,7 @@ public class AlunoDao implements Dao<Aluno> {
     @Override
     public List<Aluno> consultar() {
 
-        String sql = "SELECT * FROM aluno";
+        String sql = "SELECT * FROM aluno order by id asc";
         ArrayList<Aluno> alunos = new ArrayList<>();
 
         try {
@@ -124,7 +124,7 @@ public class AlunoDao implements Dao<Aluno> {
             }
         }
 
-        String sql = "UPDATE professor SET nome = COALESCE(?, nome), email = COALESCE(?, email), status = COALESCE(?, status) WHERE id = ?";
+        String sql = "UPDATE aluno SET nome = COALESCE(?, nome), email = COALESCE(?, email), status = COALESCE(?, status) WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
             stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);

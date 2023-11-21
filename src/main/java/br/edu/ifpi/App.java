@@ -36,7 +36,7 @@ public class App {
             // professorDao.cadastrar(professor);
             // cursoDao.cadastrar(curso);
 
-            professorDao.alterar();
+            cursoDao.alterar();
 
         } catch (SQLException e) {
             e.printStackTrace();

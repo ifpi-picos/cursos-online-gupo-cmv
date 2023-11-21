@@ -45,7 +45,7 @@ public class ProfessorDao implements Dao<Professor> {
 
   @Override
   public List<Professor> consultar() {
-    String sql = "SELECT * FROM professor";
+    String sql = "SELECT * FROM professor order by id asc";
 
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);

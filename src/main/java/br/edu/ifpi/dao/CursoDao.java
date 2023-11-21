@@ -41,7 +41,7 @@ public class CursoDao implements Dao<Curso> {
 
     @Override
     public List<Curso> consultar() {
-        String sql = "SELECT * FROM curso";
+        String sql = "SELECT * FROM curso order by id asc";
 
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
@@ -100,6 +100,8 @@ public class CursoDao implements Dao<Curso> {
         System.out.println("\nDigite o ID do curso que deseja alterar:");
         Scanner scanner = new Scanner(System.in);
         int idCurso = scanner.nextInt();
+        int novaCH = 0;
+        int novoIdProfessor = 0;
 
         String[] colunas = { "nome", "carga_horaria", "status", "id_professor"};
 
@@ -117,10 +119,18 @@ public class CursoDao implements Dao<Curso> {
         String sql = "UPDATE curso SET nome = COALESCE(?, nome), carga_horaria = COALESCE(?, carga_horaria), status = COALESCE(?, status), id_professor = COALESCE(?, id_professor) WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
+
+            if (colunas[1].matches("\\d+")){
+                novaCH = Integer.parseInt(colunas[1]);
+            }
+            if (colunas[3].matches("\\d+")){
+                novoIdProfessor = Integer.parseInt(colunas[3]);
+            }
+
             stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
-            stm.setString(2, colunas[1].equals("carga_horaria") ? null : colunas[1]);
+            stm.setObject(2, colunas[1].equals("carga_horaria") ? null : novaCH, java.sql.Types.INTEGER);
             stm.setString(3, colunas[2].equals("status") ? null : colunas[2]);
-            stm.setString(4, colunas[3].equals("id_professor") ? null : colunas[3]);
+            stm.setObject(4, colunas[3].equals("id_professor") ? null : novoIdProfessor, java.sql.Types.INTEGER);
             stm.setInt(5, idCurso);
 
             int row = stm.executeUpdate();
