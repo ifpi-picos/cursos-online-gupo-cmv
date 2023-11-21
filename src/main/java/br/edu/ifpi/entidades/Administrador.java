@@ -1,14 +1,15 @@
 package br.edu.ifpi.entidades;
 
+
 public class Administrador {
     private int id;
     private String nome;
     private String email;
 
-    public Administrador(String nome, String email, int id) {
+    public Administrador(int id ,String nome, String email) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
-        this.id = id;
     }
 
     public Administrador(String nome, String email) {
@@ -34,10 +35,6 @@ public class Administrador {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
     
 }

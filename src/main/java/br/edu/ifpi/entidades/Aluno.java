@@ -51,10 +51,5 @@ public class Aluno {
     public void setStatus(StatusAluno status) {
         this.status = status;
     }
-
-
-    public void setId(int idAluno2) {
-    }
-
     
 }
