@@ -27,6 +27,7 @@ CREATE TABLE curso_aluno (
 );
 
 CREATE TABLE administrador (
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(320) NOT NULL
 );
