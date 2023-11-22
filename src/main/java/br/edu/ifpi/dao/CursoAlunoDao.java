@@ -13,6 +13,10 @@ import br.edu.ifpi.entidades.CursoAluno;
 public class CursoAlunoDao implements Dao<CursoAluno> {
     private Connection conexao;
     
+    public CursoAlunoDao(Connection conexao) {
+        this.conexao = conexao;
+    }
+
     @Override
     public int cadastrar(CursoAluno entidade) {
         // TODO Auto-generated method stub
@@ -36,7 +40,4 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterar'");
     }
-    
-
-    
 }

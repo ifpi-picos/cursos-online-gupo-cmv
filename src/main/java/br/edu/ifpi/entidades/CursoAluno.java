@@ -6,7 +6,8 @@ public class CursoAluno {
 
     private Curso curso;
     private Aluno aluno;
-
+    private float nota1;
+   
 
     public CursoAluno(Curso curso, Aluno aluno) {
         this.curso = curso;
@@ -32,6 +33,16 @@ public class CursoAluno {
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
+
+    public float getNota1() {
+        return nota1;
+    }
+
+
+    public void setNota1(float nota1) {
+        this.nota1 = nota1;
+    }
+
 
 }
 
