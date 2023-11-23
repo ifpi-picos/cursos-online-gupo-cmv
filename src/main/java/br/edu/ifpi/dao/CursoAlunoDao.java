@@ -18,7 +18,7 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
     }
 
     @Override
-    public int cadastrar(CursoAluno entidade) {
+    public int cadastrar(CursoAluno ca) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'cadastrar'");
     }
@@ -30,13 +30,13 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
     }
 
     @Override
-    public int remover() {
+    public int remover(CursoAluno ca) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'remover'");
     }
 
     @Override
-    public int alterar() {
+    public int alterar(CursoAluno ca) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterar'");
     }

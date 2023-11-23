@@ -70,7 +70,7 @@ public class ProfessorDao implements Dao<Professor> {
   }
 
   @Override
-  public int remover() {
+  public int remover(Professor professor) {
     ProfessorDao professorDao = new ProfessorDao(conexao);
     professorDao.consultar();
 
@@ -99,33 +99,16 @@ public class ProfessorDao implements Dao<Professor> {
   }
 
   @Override
-  public int alterar() {
+  public int alterar (Professor professor) {
     ProfessorDao professorDao = new ProfessorDao(conexao);
     professorDao.consultar();
-
-    System.out.println("\nDigite o ID do professor que deseja alterar:");
-    Scanner scanner = new Scanner(System.in);
-    int idProfessor = scanner.nextInt();
-
-    String[] colunas = { "nome", "email" };
-
-    for (int i = 0; i < colunas.length; i++) {
-      System.out.println("\nDeseja alterar o " + colunas[i] + " do professor? (s/n)");
-      String valor = scanner.next();
-
-      if (valor.equals("s")) {
-        System.out.println("\nDigite o novo " + colunas[i] + " do professor:");
-        valor = scanner.next();
-        colunas[i] = valor;
-      }
-    }
 
     String sql = "UPDATE professor SET nome = COALESCE(?, nome), email = COALESCE(?, email) WHERE id = ?";
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);
-      stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
-      stm.setString(2, colunas[1].equals("email") ? null : colunas[1]);
-      stm.setInt(3, idProfessor);
+      // stm.setString(1, nome);
+      // stm.setString(2, email);
+      stm.setInt(3, professor.getId());
 
       int row = stm.executeUpdate();
       System.out.println(row);

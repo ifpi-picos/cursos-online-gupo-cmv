@@ -27,6 +27,10 @@ public class Aluno {
         return idAluno;
     }
 
+    public void setid(int idAluno) {
+        this.idAluno = idAluno;
+    }
+
     public String getNome() {
         return nome;
     }

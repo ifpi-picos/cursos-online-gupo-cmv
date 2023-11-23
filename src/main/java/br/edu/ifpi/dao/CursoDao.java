@@ -65,7 +65,7 @@ public class CursoDao implements Dao<Curso> {
     }
 
     @Override
-    public int remover() {
+    public int remover(Curso curso) {
         CursoDao cursoDao = new CursoDao(conexao);
         cursoDao.consultar();
 
@@ -93,7 +93,7 @@ public class CursoDao implements Dao<Curso> {
     }
 
     @Override
-    public int alterar() {
+    public int alterar(Curso curso) {
         CursoDao cursoDao = new CursoDao(conexao);
         cursoDao.consultar();
 

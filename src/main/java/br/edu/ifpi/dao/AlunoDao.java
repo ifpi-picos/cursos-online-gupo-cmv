@@ -75,18 +75,13 @@ public class AlunoDao implements Dao<Aluno> {
     }
 
     @Override
-    public int remover() {
-        AlunoDao alunoDao = new AlunoDao(conexao);
-        alunoDao.consultar();
-
-        System.out.println("\nDigite o ID do aluno que deseja remover:");
-        Scanner scanner = new Scanner(System.in);
-        int idAluno = scanner.nextInt();
+    public int remover(Aluno aluno) {
+        this.consultar();
 
         String sql = "DELETE FROM aluno WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-            stm.setInt(1, idAluno);
+            stm.setInt(1, aluno.getid());
 
             int row = stm.executeUpdate();
             System.out.println(row);
@@ -103,7 +98,7 @@ public class AlunoDao implements Dao<Aluno> {
     }
 
     @Override
-    public int alterar() {
+    public int alterar(Aluno aluno) {
         AlunoDao alunoDao = new AlunoDao(conexao);
         alunoDao.consultar();
 
