@@ -76,7 +76,7 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int remover(Aluno aluno) {
-        this.consultar();
+        this.conexao = conexao;
 
         String sql = "DELETE FROM aluno WHERE id = ?";
         try {
@@ -99,33 +99,15 @@ public class AlunoDao implements Dao<Aluno> {
 
     @Override
     public int alterar(Aluno aluno) {
-        AlunoDao alunoDao = new AlunoDao(conexao);
-        alunoDao.consultar();
+        this.conexao = conexao;
 
-        System.out.println("\nDigite o ID do aluno que deseja alterar:");
-        Scanner scanner = new Scanner(System.in);
-        int idAluno = scanner.nextInt();
-
-        String[] colunas = { "nome", "email", "status" };
-
-        for (int i = 0; i < colunas.length; i++) {
-            System.out.println("\nDeseja alterar o " + colunas[i] + " do aluno? (s/n)");
-            String valor = scanner.next();
-
-            if (valor.equals("s")) {
-                System.out.println("\nDigite o novo " + colunas[i] + " do aluno:");
-                valor = scanner.next();
-                colunas[i] = valor;
-            }
-        }
-
-        String sql = "UPDATE aluno SET nome = COALESCE(?, nome), email = COALESCE(?, email), status = COALESCE(?, status) WHERE id = ?";
+        String sql = "UPDATE aluno SET nome = '?', email = '?' WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-            stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
-            stm.setString(2, colunas[1].equals("email") ? null : colunas[1]);
-            stm.setString(3, colunas[2].equals("status") ? null : colunas[2]);
-            stm.setInt(4, idAluno);
+            stm.setString(1, aluno.getNome());
+            stm.setString(2, aluno.getEmail());
+            stm.setString(3, aluno.getStatus());
+            stm.setInt(4, aluno.getid());
 
             int row = stm.executeUpdate();
             System.out.println(row);

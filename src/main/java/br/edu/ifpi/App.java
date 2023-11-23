@@ -16,8 +16,6 @@ import java.util.Scanner;
 /*
 3. Criar tabelas de relacionamento entre as entidades e immprimí-las.
     * Cursos e professores;
-    * Alunos, cursos e notas (+ média);
-4. Sistema de autenticação e permissão de usuários.
 */
 
 public class App {
@@ -28,15 +26,8 @@ public class App {
             ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
             AutenticacaoDao autenticacaoDao = new AutenticacaoDao(Conexao.getConnection());
 
-
-            System.out.println("\n");
-            autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
-            System.out.println("\n");
-            autenticacaoDao.autenticarProfessor("victorgay@gmail.com");
-            System.out.println("\n");
-            autenticacaoDao.autenticarAluno("sousamaykon@gmail.com");
-            System.out.println("\n");
-            autenticacaoDao.autenticarAluno("victorgay@gmail.com");
+            Aluno alunoTeste = autenticacaoDao.autenticarAluno("sousamaykon@gmail.com");
+            
 
         } catch (SQLException e) {
             e.printStackTrace();

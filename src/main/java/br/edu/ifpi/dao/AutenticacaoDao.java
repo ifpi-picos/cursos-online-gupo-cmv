@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.edu.ifpi.entidades.Aluno;
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.Professor;
 import br.edu.ifpi.enums.StatusAluno;
 
