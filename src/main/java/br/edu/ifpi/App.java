@@ -27,7 +27,9 @@ public class App {
             AutenticacaoDao autenticacaoDao = new AutenticacaoDao(Conexao.getConnection());
 
             Aluno alunoTeste = autenticacaoDao.autenticarAluno("sousamaykon@gmail.com");
-            
+
+            alunoTeste.setNome("Willyam");
+            alunoDao.alterar(alunoTeste);
 
         } catch (SQLException e) {
             e.printStackTrace();

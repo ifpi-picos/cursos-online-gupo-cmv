@@ -101,7 +101,7 @@ public class AlunoDao implements Dao<Aluno> {
     public int alterar(Aluno aluno) {
         this.conexao = conexao;
 
-        String sql = "UPDATE aluno SET nome = '?', email = '?' WHERE id = ?";
+        String sql = "UPDATE aluno SET nome = ?, email = ?, status = ? WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
             stm.setString(1, aluno.getNome());

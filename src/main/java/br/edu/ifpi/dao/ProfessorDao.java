@@ -71,18 +71,13 @@ public class ProfessorDao implements Dao<Professor> {
 
   @Override
   public int remover(Professor professor) {
-    ProfessorDao professorDao = new ProfessorDao(conexao);
-    professorDao.consultar();
-
-    System.out.println("\nDigite o ID do professor que deseja remover:");
-    Scanner scanner = new Scanner(System.in);
-    int idProfessor = scanner.nextInt();
+    this.conexao = conexao;
 
     String sql = "DELETE FROM professor WHERE id = ?";
 
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);
-      stm.setInt(1, idProfessor);
+      stm.setInt(1, professor.getId());
 
       int row = stm.executeUpdate();
       System.out.println(row);
@@ -100,14 +95,14 @@ public class ProfessorDao implements Dao<Professor> {
 
   @Override
   public int alterar (Professor professor) {
-    ProfessorDao professorDao = new ProfessorDao(conexao);
-    professorDao.consultar();
+    this.conexao = conexao;
 
-    String sql = "UPDATE professor SET nome = COALESCE(?, nome), email = COALESCE(?, email) WHERE id = ?";
+    String sql = "UPDATE professor SET nome = ?, email = ? WHERE id = ?";
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);
-      // stm.setString(1, nome);
-      // stm.setString(2, email);
+      
+      stm.setString(1, professor.getNome());
+      stm.setString(2, professor.getEmail());
       stm.setInt(3, professor.getId());
 
       int row = stm.executeUpdate();

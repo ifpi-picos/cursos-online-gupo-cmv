@@ -17,13 +17,13 @@ public class Curso {
         this.professor = professor;
     }
 
-
     public Curso(String nome, StatusCurso status, int cargaHoraria, Professor professor) {
         this.nome = nome;
         this.status = status;
         this.cargaHoraria = cargaHoraria;
         this.professor = professor;
     }
+    
     public int getId() {
         return id;
     }
