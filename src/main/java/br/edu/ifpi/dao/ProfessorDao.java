@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.ifpi.entidades.CursoAluno;
 import br.edu.ifpi.entidades.Professor;
 
 public class ProfessorDao implements Dao<Professor> {
@@ -119,5 +120,33 @@ public class ProfessorDao implements Dao<Professor> {
     }
     return 0;
   }
+
+  public int cadastrarNotas(CursoAluno cursoAluno) {
+  String sql = "UPDATE aluno_curso SET nota1 = ? WHERE id_aluno = ? AND id_curso = ?";
+
+  try {
+    PreparedStatement stm = conexao.prepareStatement(sql);
+
+    stm.setDouble(1, cursoAluno.getNota1());
+    stm.setInt(2, cursoAluno.getIdAluno());
+    stm.setInt(3, cursoAluno.getIdCurso());
+
+    int row = stm.executeUpdate();
+    System.out.println(row);
+
+    return row;
+
+  } catch (SQLException e) {
+    System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+  } catch (Exception e) {
+    e.printStackTrace();
+
+  }
+
+  
+  return 0;
+
+}
 
 }
