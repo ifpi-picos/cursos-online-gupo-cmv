@@ -43,6 +43,16 @@ public class CursoAluno {
         this.nota1 = nota1;
     }
 
+    public int getIdAluno() {
+        return aluno.getid();
+    }
+
+    public int getIdCurso() {
+        return curso.getId();
+    }
+
+    
+
 
 }
 
