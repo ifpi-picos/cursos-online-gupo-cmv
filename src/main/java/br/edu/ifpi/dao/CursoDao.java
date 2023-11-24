@@ -66,17 +66,12 @@ public class CursoDao implements Dao<Curso> {
 
     @Override
     public int remover(Curso curso) {
-        CursoDao cursoDao = new CursoDao(conexao);
-        cursoDao.consultar();
-
-        System.out.println("\nDigite o ID do cruso que deseja remover:");
-        Scanner scanner = new Scanner(System.in);
-        int idCurso = scanner.nextInt();
+        this.conexao = conexao;
 
         String sql = "DELETE FROM curso WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-            stm.setInt(1, idCurso);
+            stm.setInt(1, curso.getId());
 
             int row = stm.executeUpdate();
             System.out.println(row);
@@ -94,48 +89,18 @@ public class CursoDao implements Dao<Curso> {
 
     @Override
     public int alterar(Curso curso) {
-        CursoDao cursoDao = new CursoDao(conexao);
-        cursoDao.consultar();
+        this.conexao = conexao;
 
-        System.out.println("\nDigite o ID do curso que deseja alterar:");
-        Scanner scanner = new Scanner(System.in);
-        int idCurso = scanner.nextInt();
-        int novaCH = 0;
-        int novoIdProfessor = 0;
-
-        String[] colunas = { "nome", "carga_horaria", "status", "id_professor"};
-
-        for (int i = 0; i < colunas.length; i++) {
-            System.out.println("\nDeseja alterar o " + colunas[i] + " do curso? (s/n)");
-            String valor = scanner.next();
-
-            if (valor.equals("s")) {
-                System.out.println("\nDigite o novo " + colunas[i] + " do curso:");
-                valor = scanner.next();
-                colunas[i] = valor;
-            }
-        }
-
-        String sql = "UPDATE curso SET nome = COALESCE(?, nome), carga_horaria = COALESCE(?, carga_horaria), status = COALESCE(?, status), id_professor = COALESCE(?, id_professor) WHERE id = ?";
+        String sql = "UPDATE curso SET nome = ?, carga_horaria = ?, status = ?, id_professor = ? WHERE id = ?";
         try {
             PreparedStatement stm = conexao.prepareStatement(sql);
-
-            if (colunas[1].matches("\\d+")){
-                novaCH = Integer.parseInt(colunas[1]);
-            }
-            if (colunas[3].matches("\\d+")){
-                novoIdProfessor = Integer.parseInt(colunas[3]);
-            }
-
-            stm.setString(1, colunas[0].equals("nome") ? null : colunas[0]);
-            stm.setObject(2, colunas[1].equals("carga_horaria") ? null : novaCH, java.sql.Types.INTEGER);
-            stm.setString(3, colunas[2].equals("status") ? null : colunas[2]);
-            stm.setObject(4, colunas[3].equals("id_professor") ? null : novoIdProfessor, java.sql.Types.INTEGER);
-            stm.setInt(5, idCurso);
+            stm.setString(1, curso.getNome());
+            stm.setInt(2, curso.getCargaHoraria());
+            stm.setString(3, curso.getStatusCurso());
+            stm.setInt(4, curso.getProfessor().getId());
+            stm.setInt(5, curso.getId());
 
             int row = stm.executeUpdate();
-            System.out.println(row);
-
             return row;
 
         } catch (SQLException e) {
@@ -148,7 +113,7 @@ public class CursoDao implements Dao<Curso> {
         return 0;
     }
 
-        public void matricularAlunoEmCurso(int idAluno, int idCurso) {
+    public void matricularAlunoEmCurso(int idAluno, int idCurso) {
         String sql = "INSERT INTO curso_aluno (id_curso, id_aluno) VALUES (?, ?)";
 
         try (Connection connection = Conexao.getConnection();

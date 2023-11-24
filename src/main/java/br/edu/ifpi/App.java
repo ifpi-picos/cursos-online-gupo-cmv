@@ -14,7 +14,8 @@ import br.edu.ifpi.entidades.Professor;
 import java.util.Scanner;
 
 /*
-3. Criar tabelas de relacionamento entre as entidades e immprimí-las.
+3. Método de autenticação de curso.
+2. Criar tabelas de relacionamento entre as entidades e immprimí-las.
     * Cursos e professores;
 */
 
@@ -26,10 +27,7 @@ public class App {
             ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
             AutenticacaoDao autenticacaoDao = new AutenticacaoDao(Conexao.getConnection());
 
-            Aluno alunoTeste = autenticacaoDao.autenticarAluno("sousamaykon@gmail.com");
-
-            alunoTeste.setNome("Willyam");
-            alunoDao.alterar(alunoTeste);
+            //autenticacaoDao.autenticarCurso("Java");
 
         } catch (SQLException e) {
             e.printStackTrace();
