@@ -1,4 +1,8 @@
 package br.edu.ifpi.entidades;
+import java.sql.SQLException;
+
+import br.edu.ifpi.dao.Conexao;
+import br.edu.ifpi.dao.CursoAlunoDao;
 import br.edu.ifpi.enums.StatusAluno;
 
 public class Aluno {
@@ -54,6 +58,11 @@ public class Aluno {
 
     public void setStatus(StatusAluno status) {
         this.status = status;
+    }
+
+    public void gerarBoletim(Aluno aluno) throws SQLException{
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.consultarBoletimAluno(aluno);
     }
     
 }

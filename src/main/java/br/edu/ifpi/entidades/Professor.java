@@ -1,5 +1,9 @@
 package br.edu.ifpi.entidades;
 
+import java.sql.SQLException;
+
+import br.edu.ifpi.dao.Conexao;
+import br.edu.ifpi.dao.ProfessorDao;
 
 public class Professor {
     private int id = 1;
@@ -45,5 +49,8 @@ public class Professor {
         this.id = id;
     }
 
-
+    public void exibirCursos(Professor professor) throws SQLException {
+        ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
+        professorDao.cursosMinistrados(professor);
+    }
 }

@@ -26,6 +26,12 @@ CREATE TABLE curso_aluno (
     PRIMARY KEY (id_curso, id_aluno)
 );
 
+CREATE TABLE curso_professor (
+    id_curso INT REFERENCES curso(id),
+    id_professor INT REFERENCES professor(id),
+    PRIMARY KEY (id_curso, id_professor)
+);
+
 CREATE TABLE administrador (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,

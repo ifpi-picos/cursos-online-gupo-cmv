@@ -72,7 +72,6 @@ public class Curso {
         CursoAluno ca = new CursoAluno(this, aluno);
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.cadastrar(ca);
-
     }
 
 }

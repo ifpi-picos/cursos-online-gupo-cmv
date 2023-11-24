@@ -9,6 +9,7 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Curso;
+import br.edu.ifpi.entidades.CursoAluno;
 import br.edu.ifpi.entidades.Professor;
 import br.edu.ifpi.enums.StatusAluno;
 import br.edu.ifpi.enums.StatusCurso;
@@ -75,40 +76,33 @@ public class AutenticacaoDao {
         return null;
     }
 
-    /* 
     public Curso autenticarCurso(String nomeCurso) {
-        String sql = "SELECT curso.id, curso.nome, curso.carga_horaria, curso.status, curso.id_professor, professor.nome, professor.email "
-                +
+        String sql = "SELECT curso.id as curso_id, curso.nome as curso_nome, curso.carga_horaria, curso.status, " +
+                "professor.id as professor_id, professor.nome as professor_nome, professor.email " +
                 "FROM curso " +
                 "JOIN professor ON curso.id_professor = professor.id " +
                 "WHERE curso.nome = ?";
 
-        try {
-            PreparedStatement stm = conexao.prepareStatement(sql);
+        try (PreparedStatement stm = conexao.prepareStatement(sql)) {
             stm.setString(1, nomeCurso);
-            ResultSet resultSet = stm.executeQuery();
+            try (ResultSet resultSet = stm.executeQuery()) {
+                if (resultSet.next()) {
+                    int idCurso = resultSet.getInt("curso_id");
+                    String nome = resultSet.getString("curso_nome");
+                    int cargaHoraria = resultSet.getInt("carga_horaria");
+                    StatusCurso status = StatusCurso.valueOf(resultSet.getString("status"));
+                    int idProfessor = resultSet.getInt("professor_id");
+                    String nomeProfessor = resultSet.getString("professor_nome");
+                    String emailProfessor = resultSet.getString("email");
+                    Professor professor = new Professor(idProfessor, nomeProfessor, emailProfessor);
 
-            if (resultSet.next()) {
-                
-                 int idCurso = resultSet.getInt("curso.id");
-                 String nome = resultSet.getString("curso.nome");
-                 int cargaHoraria = resultSet.getInt("curso.carga_horaria");
-                 StatusCurso status =
-                 StatusCurso.valueOf(resultSet.getString("curso.status"));
-                 int idProfessor = resultSet.getInt("curso.id_professor");
-                 String nomeProfessor = resultSet.getString("professor.nome");
-                 String emailProfessor = resultSet.getString("professor.email");
-                 Professor professor = new Professor(idProfessor, nomeProfessor,
-                 emailProfessor);
-                 
-
-                System.out.println("Curso autenticado com sucesso!");
-                return new Curso(idCurso, nome, status, cargaHoraria, professor);
+                    System.out.println("Curso autenticado com sucesso!");
+                    return new Curso(idCurso, nome, status, cargaHoraria, professor);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    */
 }

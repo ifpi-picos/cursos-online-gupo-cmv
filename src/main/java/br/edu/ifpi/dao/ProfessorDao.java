@@ -3,9 +3,11 @@ package br.edu.ifpi.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.CursoAluno;
 import br.edu.ifpi.entidades.Professor;
 
@@ -95,13 +97,13 @@ public class ProfessorDao implements Dao<Professor> {
   }
 
   @Override
-  public int alterar (Professor professor) {
+  public int alterar(Professor professor) {
     this.conexao = conexao;
 
     String sql = "UPDATE professor SET nome = ?, email = ? WHERE id = ?";
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);
-      
+
       stm.setString(1, professor.getNome());
       stm.setString(2, professor.getEmail());
       stm.setInt(3, professor.getId());
@@ -121,32 +123,63 @@ public class ProfessorDao implements Dao<Professor> {
     return 0;
   }
 
-  public int cadastrarNotas(CursoAluno cursoAluno) {
-  String sql = "UPDATE aluno_curso SET nota1 = ? WHERE id_aluno = ? AND id_curso = ?";
+  public int cadastrarNotas(CursoAluno cursoAluno, Double nota) {
+    String sql = "UPDATE curso_aluno SET nota = ? WHERE id_aluno = ? AND id_curso = ?";
 
-  try {
-    PreparedStatement stm = conexao.prepareStatement(sql);
+    try {
+      PreparedStatement stm = conexao.prepareStatement(sql);
 
-    stm.setDouble(1, cursoAluno.getNota1());
-    stm.setInt(2, cursoAluno.getIdAluno());
-    stm.setInt(3, cursoAluno.getIdCurso());
+      stm.setDouble(1, nota);
+      stm.setInt(2, cursoAluno.getIdAluno());
+      stm.setInt(3, cursoAluno.getIdCurso());
 
-    int row = stm.executeUpdate();
-    System.out.println(row);
+      int row = stm.executeUpdate();
+      System.out.println(row);
 
-    return row;
+      return row;
 
-  } catch (SQLException e) {
-    System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+    } catch (SQLException e) {
+      System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 
-  } catch (Exception e) {
-    e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    }
+
+    return 0;
 
   }
 
-  
-  return 0;
+  public List<Curso> cursosMinistrados(Professor professor) {
+    String sql = "SELECT curso.nome as nome, curso.carga_horaria as carga_horaria, curso.status as status, curso.id as id " +
+        "FROM curso " +
+        "WHERE curso.id_professor = ?";
 
-}
+    List<Curso> cursos = new ArrayList<>();
+
+    try {
+      PreparedStatement stm = conexao.prepareStatement(sql);
+      stm.setInt(1, professor.getId());
+
+      java.sql.ResultSet resultSet = stm.executeQuery();
+
+      System.out.println("\n----- Lista de cursos ministrados -----");
+      while (resultSet.next()) {
+        String nome = resultSet.getString("nome");
+        int cargaHoraria = resultSet.getInt("carga_horaria");
+        String status = resultSet.getString("status");
+
+        System.out.println(nome + " | " + cargaHoraria + " | " + status);
+      }
+    } catch (SQLException e) {
+      System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    }
+
+    return cursos;
+  }
 
 }
