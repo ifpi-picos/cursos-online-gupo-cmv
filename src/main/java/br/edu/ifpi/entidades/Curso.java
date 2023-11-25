@@ -74,4 +74,10 @@ public class Curso {
         cursoAlunoDao.cadastrar(ca);
     }
 
+    public void cancelarMatricula(Aluno aluno) throws SQLException {
+        CursoAluno ca = new CursoAluno(this, aluno);
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.remover(ca);
+    }
+
 }

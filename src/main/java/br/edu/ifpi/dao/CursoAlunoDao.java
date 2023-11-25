@@ -55,9 +55,31 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
     }
 
     @Override
-    public int remover(CursoAluno ca) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+    public int remover(CursoAluno cursoAluno) {
+        this.conexao = conexao;
+
+        String sql = "DELETE FROM curso_aluno WHERE ID_CURSO = ? AND ID_ALUNO = ?";
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+
+            stm.setInt(1, cursoAluno.getIdCurso());
+            stm.setInt(2, cursoAluno.getIdAluno());
+
+            int row = stm.executeUpdate();
+            System.err.println(row);
+
+            System.out.println(row);
+            return row;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
     }
 
     @Override
