@@ -27,7 +27,11 @@ public class CursoDao implements Dao<Curso> {
             statement.setString(2, curso.getStatusCurso());
             statement.setInt(3, curso.getCargaHoraria());
             statement.setInt(4, curso.getProfessor().getId());
-            return statement.executeUpdate();
+            
+            int row = statement.executeUpdate();
+
+            System.out.println(row);
+            return row;
 
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -111,6 +115,30 @@ public class CursoDao implements Dao<Curso> {
 
         }
         return 0;
+    }
+
+    public List<Curso> consultarCursosAbertos() {
+        String sql = "SELECT * FROM curso WHERE status = 'ABERTO'";
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            ResultSet resultSet = stm.executeQuery();
+
+            System.out.println("\n----- Lista de cursos abertos -----");
+            while (resultSet.next()) {
+                int idcurso = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String status = resultSet.getString("status");
+                int cargaHoraria = resultSet.getInt("CARGA_HORARIA");
+                int idProfessor = resultSet.getInt("ID_PROFESSOR");
+
+                System.out
+                        .println(idcurso + " | " + nome + " | " + status + " | " + cargaHoraria + " | " + idProfessor);
+            }
+        } catch (SQLException e) {
+            System.err.format("Erro ao listar os professores. SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+        return null;
     }
 
     public void matricularAlunoEmCurso(int idAluno, int idCurso) {

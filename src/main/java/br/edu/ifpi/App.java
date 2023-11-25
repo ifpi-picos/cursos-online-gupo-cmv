@@ -11,6 +11,7 @@ import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Curso;
 import br.edu.ifpi.entidades.CursoAluno;
 import br.edu.ifpi.entidades.Professor;
+import br.edu.ifpi.enums.StatusCurso;
 
 public class App {
     public static void main(String[] args) {
@@ -22,8 +23,10 @@ public class App {
 
             Aluno alunoTeste = autenticacaoDao.autenticarAluno("pvsales@gmail.com");
             Curso cursoTeste = autenticacaoDao.autenticarCurso("Java");
+            Curso cursoteste2 = autenticacaoDao.autenticarCurso("Engenharia");
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
 
+            cursoDao.consultarCursosAbertos();
         } catch (SQLException e) {
             e.printStackTrace();
         }
