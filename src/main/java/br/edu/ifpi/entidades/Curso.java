@@ -80,4 +80,8 @@ public class Curso {
         cursoAlunoDao.remover(ca);
     }
 
+    public void exibirTurma(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.consultarPorCurso(curso);
+    }
 }

@@ -122,4 +122,23 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
         return cursos;
     }
+
+    public void consultarPorCurso(Curso curso) throws SQLException {
+        String sql = "SELECT aluno.nome as nome, curso_aluno.nota as nota " +
+                "FROM curso_aluno " +
+                "JOIN aluno on aluno.id = curso_aluno.id_aluno " +
+                "WHERE curso_aluno.id_curso = ?";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, curso.getId());
+        ResultSet resultSet = stm.executeQuery();
+
+        System.out.println("\n----- Lista de alunos -----");
+        while (resultSet.next()) {
+            String nomeAluno = resultSet.getString("nome");
+            Double nota = resultSet.getDouble("nota");
+
+            System.out.println(nomeAluno + " | " + nota);
+        }
+    }
 }

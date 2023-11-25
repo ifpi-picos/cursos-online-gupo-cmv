@@ -24,8 +24,6 @@ public class App {
             Curso cursoTeste = autenticacaoDao.autenticarCurso("Java");
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
 
-            cursoTeste.cancelarMatricula(alunoTeste);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

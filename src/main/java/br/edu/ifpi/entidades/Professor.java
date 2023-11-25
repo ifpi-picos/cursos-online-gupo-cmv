@@ -3,6 +3,7 @@ package br.edu.ifpi.entidades;
 import java.sql.SQLException;
 
 import br.edu.ifpi.dao.Conexao;
+import br.edu.ifpi.dao.CursoAlunoDao;
 import br.edu.ifpi.dao.ProfessorDao;
 
 public class Professor {
