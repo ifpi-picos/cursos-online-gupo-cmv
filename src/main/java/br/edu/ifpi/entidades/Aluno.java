@@ -64,5 +64,11 @@ public class Aluno {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.consultarBoletimAluno(aluno);
     }
+
+
+    public void perfilAluno(Aluno alunoTeste) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.perfilAluno(alunoTeste);
+    }
     
 }

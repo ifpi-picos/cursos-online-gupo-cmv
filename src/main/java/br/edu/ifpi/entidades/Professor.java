@@ -54,4 +54,6 @@ public class Professor {
         ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
         professorDao.cursosMinistrados(professor);
     }
+
+
 }

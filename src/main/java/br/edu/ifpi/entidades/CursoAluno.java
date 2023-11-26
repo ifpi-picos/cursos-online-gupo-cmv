@@ -1,5 +1,8 @@
 package br.edu.ifpi.entidades;
 import br.edu.ifpi.entidades.Curso;
+
+import java.sql.Connection;
+
 import br.edu.ifpi.entidades.Aluno;
 
 public class CursoAluno {
@@ -12,6 +15,10 @@ public class CursoAluno {
     public CursoAluno(Curso curso, Aluno aluno) {
         this.curso = curso;
         this.aluno = aluno;
+    }
+
+
+    public CursoAluno(Connection connection) {
     }
 
 

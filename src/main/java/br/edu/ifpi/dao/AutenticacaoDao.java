@@ -96,7 +96,6 @@ public class AutenticacaoDao {
                     String emailProfessor = resultSet.getString("email");
                     Professor professor = new Professor(idProfessor, nomeProfessor, emailProfessor);
 
-                    System.out.println("Curso autenticado com sucesso!");
                     return new Curso(idCurso, nome, status, cargaHoraria, professor);
                 }
             }

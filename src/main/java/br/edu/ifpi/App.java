@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import br.edu.ifpi.dao.AlunoDao;
 import br.edu.ifpi.dao.AutenticacaoDao;
 import br.edu.ifpi.dao.Conexao;
+import br.edu.ifpi.dao.CursoAlunoDao;
 import br.edu.ifpi.dao.CursoDao;
 import br.edu.ifpi.dao.ProfessorDao;
 import br.edu.ifpi.entidades.Aluno;
@@ -26,7 +27,16 @@ public class App {
             Curso cursoteste2 = autenticacaoDao.autenticarCurso("Engenharia");
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
 
-            cursoDao.consultarCursosAbertos();
+            CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste);
+
+            alunoTeste.perfilAluno(alunoTeste);
+
+
+
+
+        
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

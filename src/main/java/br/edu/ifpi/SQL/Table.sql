@@ -32,9 +32,4 @@ CREATE TABLE curso_professor (
     PRIMARY KEY (id_curso, id_professor)
 );
 
-CREATE TABLE administrador (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    email VARCHAR(320) NOT NULL
-);
 

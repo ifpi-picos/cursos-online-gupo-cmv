@@ -50,8 +50,32 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
     @Override
     public List<CursoAluno> consultar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultar'");
+        String sql = "SELECT * FROM curso_aluno order by id asc";
+        ArrayList<CursoAluno> cursoAlunos = new ArrayList<>();
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
+            ResultSet resultSet = stm.executeQuery();
+
+            System.out.println("\n----- Lista de cursos -----");
+            while (resultSet.next()) {
+                int idCurso = resultSet.getInt("id_curso");
+                int idAluno = resultSet.getInt("id_aluno");
+
+                cursoAlunos.add(new CursoAluno(new Curso(idCurso, sql, null, idAluno, null), new Aluno(idAluno, sql, sql, null)));
+            }
+
+            return cursoAlunos;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
     }
 
     @Override
@@ -84,8 +108,10 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
     @Override
     public int alterar(CursoAluno ca) {
+        return 0;
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+
+       
     }
 
     public List<CursoAluno> consultarBoletimAluno(Aluno aluno) {
@@ -140,5 +166,23 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
             System.out.println(nomeAluno + " | " + nota);
         }
+    }
+
+    public void perfilAluno(Aluno aluno) throws SQLException {
+        String sql = "SELECT id, nome, email FROM aluno WHERE id = ?";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, aluno.getid());
+        ResultSet resultSet = stm.executeQuery();
+
+        System.out.println("\n----- Perfil Aluno -----");
+        while (resultSet.next()) {
+            int idAluno = resultSet.getInt("id");
+            String nomeAluno = resultSet.getString("nome");
+            String emailAluno = resultSet.getString("email");
+
+            System.out.println("Nome: " + nomeAluno + " | " + "Id: " + idAluno + " | " + "Email: " + emailAluno);
+        }  
+        this.consultarBoletimAluno(aluno);
     }
 }
