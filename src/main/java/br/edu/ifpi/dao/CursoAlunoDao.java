@@ -50,7 +50,7 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
     @Override
     public List<CursoAluno> consultar() {
-        String sql = "SELECT * FROM curso_aluno order by id asc";
+        String sql = "SELECT * FROM curso_aluno";
         ArrayList<CursoAluno> cursoAlunos = new ArrayList<>();
 
         try {
@@ -184,5 +184,19 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             System.out.println("Nome: " + nomeAluno + " | " + "Id: " + idAluno + " | " + "Email: " + emailAluno);
         }  
         this.consultarBoletimAluno(aluno);
+    }
+
+    public void quantidadeAlunosPorCurso(Curso curso) throws SQLException {
+        String sql = "SELECT COUNT(id_aluno) as quantidade FROM curso_aluno WHERE id_curso = ?";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, curso.getId());
+        ResultSet resultSet = stm.executeQuery();
+
+        while (resultSet.next()) {
+            int quantidade = resultSet.getInt("quantidade");
+
+            System.out.println("Quantidade de alunos matriculados no curso " + curso.getNome() + ": " + quantidade);
+        }
     }
 }

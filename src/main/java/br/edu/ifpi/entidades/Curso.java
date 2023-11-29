@@ -84,4 +84,9 @@ public class Curso {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.consultarPorCurso(curso);
     }
+
+    public void quantidadeAlunos(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.quantidadeAlunosPorCurso(curso);
+    }
 }
