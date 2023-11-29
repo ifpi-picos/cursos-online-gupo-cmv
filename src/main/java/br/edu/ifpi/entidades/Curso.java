@@ -89,4 +89,9 @@ public class Curso {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.quantidadeAlunosPorCurso(curso);
     }
+
+    public void mediaGeral(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.mediaALunos(curso);
+    }
 }

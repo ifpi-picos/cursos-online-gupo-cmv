@@ -199,4 +199,18 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             System.out.println("Quantidade de alunos matriculados no curso " + curso.getNome() + ": " + quantidade);
         }
     }
+
+    public void mediaALunos(Curso curso) throws SQLException {
+        String sql = "SELECT AVG(nota) as media FROM curso_aluno WHERE id_curso = ?";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, curso.getId());
+        ResultSet resultSet = stm.executeQuery();
+
+        while (resultSet.next()) {
+            Double media = resultSet.getDouble("media");
+
+            System.out.println("Nota média geral dos alunos em " + curso.getNome() + ": " + media);
+        }
+    }
 }

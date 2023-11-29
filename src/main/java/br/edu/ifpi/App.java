@@ -32,6 +32,8 @@ public class App {
             System.out.println("\n\n");
 
             cursoTeste.quantidadeAlunos(cursoTeste);
+            cursoTeste.mediaGeral(cursoTeste);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
