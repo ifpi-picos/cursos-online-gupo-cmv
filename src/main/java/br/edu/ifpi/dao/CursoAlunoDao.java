@@ -213,4 +213,19 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             System.out.println("Nota média geral dos alunos em " + curso.getNome() + ": " + media);
         }
     }
+
+    public void porcentagemAprovados(Curso curso) throws SQLException {
+        String sql = "SELECT COUNT(*) as alunos, COUNT(id_aluno) as aprovados FROM curso_aluno WHERE id_curso = ? AND nota >= 7";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, curso.getId());
+        ResultSet resultSet = stm.executeQuery();
+
+        while (resultSet.next()) {
+            int aprovados = resultSet.getInt("aprovados");
+            int alunos = resultSet.getInt("alunos");
+
+            System.out.println("Porcentagem de alunos aprovados em " + curso.getNome() + ": " + ((aprovados/alunos)*100) + "%");
+        }
+    }
 }

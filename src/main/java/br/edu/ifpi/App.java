@@ -21,7 +21,7 @@ public class App {
             CursoDao cursoDao = new CursoDao(Conexao.getConnection());
             ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
             AutenticacaoDao autenticacaoDao = new AutenticacaoDao(Conexao.getConnection());
-            CursoAlunoDao cursoALunoDao = new CursoAlunoDao(Conexao.getConnection());
+            CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
 
             Aluno alunoTeste = autenticacaoDao.autenticarAluno("pvsales@gmail.com");
             Curso cursoTeste = autenticacaoDao.autenticarCurso("Java");
@@ -33,7 +33,8 @@ public class App {
 
             cursoTeste.quantidadeAlunos(cursoTeste);
             cursoTeste.mediaGeral(cursoTeste);
-            
+            cursoTeste.porcentagemAprovados(cursoTeste);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

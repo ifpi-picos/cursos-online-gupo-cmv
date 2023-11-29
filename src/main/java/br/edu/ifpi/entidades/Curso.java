@@ -94,4 +94,9 @@ public class Curso {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.mediaALunos(curso);
     }
+
+    public void porcentagemAprovados(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.porcentagemAprovados(curso);
+    }
 }
