@@ -26,11 +26,15 @@ public class App {
 
             Aluno alunoTeste = autenticacaoDao.autenticarAluno("fernanda@gmail.com");
             Curso cursoTeste = autenticacaoDao.autenticarCurso("geografia");
+            Aluno alunoTeste2 = autenticacaoDao.autenticarAluno("pvsales@gmail.com");
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
             CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste);
 
        
-       alunoTeste.cancelarMatricula(cursoTeste);
+            //alunoTeste.cancelarMatricula(cursoTeste);
+            //alunoTeste.cursosConcluido(alunoTeste);
+            //alunoTeste2.cursosConcluido(alunoTeste2);
+
 
 
     

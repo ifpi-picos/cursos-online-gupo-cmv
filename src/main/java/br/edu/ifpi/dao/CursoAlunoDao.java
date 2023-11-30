@@ -228,4 +228,25 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             System.out.println("Porcentagem de alunos aprovados em " + curso.getNome() + ": " + ((aprovados/alunos)*100) + "%");
         }
     }
+
+    public void cursosConcluido (Aluno aluno) throws SQLException {
+        String sql = "SELECT curso.nome as curso_nome " +
+                    "FROM curso_aluno " +
+                    "JOIN curso on curso.id = curso_aluno.id_curso " +
+                    "WHERE curso_aluno.id_aluno = ? AND curso_aluno.nota >= 7";
+    
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, aluno.getid());
+        ResultSet resultSet = stm.executeQuery();
+
+        System.out.println("\n----- Cursos concluídos -----");
+        while (resultSet.next()) {
+            String nomeCurso = resultSet.getString("curso_nome");
+
+            System.out.println(nomeCurso);
+        }
+    
+    }
+
+
 }
