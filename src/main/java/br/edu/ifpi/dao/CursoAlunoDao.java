@@ -62,7 +62,8 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
                 int idCurso = resultSet.getInt("id_curso");
                 int idAluno = resultSet.getInt("id_aluno");
 
-                cursoAlunos.add(new CursoAluno(new Curso(idCurso, sql, null, idAluno, null), new Aluno(idAluno, sql, sql, null)));
+                cursoAlunos.add(new CursoAluno(new Curso(idCurso, sql, null, idAluno, null),
+                        new Aluno(idAluno, sql, sql, null)));
             }
 
             return cursoAlunos;
@@ -111,7 +112,6 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
         return 0;
         // TODO Auto-generated method stub
 
-       
     }
 
     public List<CursoAluno> consultarBoletimAluno(Aluno aluno) {
@@ -182,7 +182,7 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             String emailAluno = resultSet.getString("email");
 
             System.out.println("Nome: " + nomeAluno + " | " + "Id: " + idAluno + " | " + "Email: " + emailAluno);
-        }  
+        }
         this.consultarBoletimAluno(aluno);
     }
 
@@ -214,8 +214,11 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
         }
     }
 
-    public void porcentagemAprovados(Curso curso) throws SQLException {
-        String sql = "SELECT COUNT(*) as alunos, COUNT(id_aluno) as aprovados FROM curso_aluno WHERE id_curso = ? AND nota >= 7";
+    public Double porcentagemAprovados(Curso curso) throws SQLException {
+        String sql = "SELECT COUNT(*) as alunos, " +
+                "COUNT(CASE WHEN nota >= 7 THEN 1 END) as aprovados " +
+                "FROM curso_aluno " +
+                "WHERE id_curso = ?";
 
         PreparedStatement stm = conexao.prepareStatement(sql);
         stm.setInt(1, curso.getId());
@@ -225,16 +228,48 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
             int aprovados = resultSet.getInt("aprovados");
             int alunos = resultSet.getInt("alunos");
 
-            System.out.println("Porcentagem de alunos aprovados em " + curso.getNome() + ": " + ((aprovados/alunos)*100) + "%");
+            double percentualAprovados = ((double) aprovados / alunos) * 100;
+
+            System.out.println("Porcentagem de alunos aprovados em " + curso.getNome() + ": "
+                    + percentualAprovados + "%");
+            
+            return percentualAprovados;
         }
+
+        return null;
     }
 
-    public void cursosConcluido (Aluno aluno) throws SQLException {
+    public Double porcentagemReprovados(Curso curso) throws SQLException {
+        String sql = "SELECT COUNT(*) as alunos, " +
+                "COUNT(CASE WHEN nota < 7 THEN 1 END) as reprovados " +
+                "FROM curso_aluno " +
+                "WHERE id_curso = ?";
+
+        PreparedStatement stm = conexao.prepareStatement(sql);
+        stm.setInt(1, curso.getId());
+        ResultSet resultSet = stm.executeQuery();
+
+        while (resultSet.next()) {
+            int reprovados = resultSet.getInt("reprovados");
+            int alunos = resultSet.getInt("alunos");
+
+            double percentualReprovados = ((double) reprovados / alunos) * 100;
+
+            System.out.println("Porcentagem de alunos reprovados em " + curso.getNome() + ": "
+                    + percentualReprovados + "%");
+            
+            return percentualReprovados;
+        }
+
+        return null;
+    }
+
+    public void cursosConcluido(Aluno aluno) throws SQLException {
         String sql = "SELECT curso.nome as curso_nome " +
-                    "FROM curso_aluno " +
-                    "JOIN curso on curso.id = curso_aluno.id_curso " +
-                    "WHERE curso_aluno.id_aluno = ? AND status_matricula = 'CONCLUIDO' ";
-    
+                "FROM curso_aluno " +
+                "JOIN curso on curso.id = curso_aluno.id_curso " +
+                "WHERE curso_aluno.id_aluno = ? AND status_matricula = 'CONCLUIDO' ";
+
         PreparedStatement stm = conexao.prepareStatement(sql);
         stm.setInt(1, aluno.getid());
         ResultSet resultSet = stm.executeQuery();
@@ -245,15 +280,15 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
             System.out.println(nomeCurso);
         }
-    
+
     }
 
-    public void cursosMatriculados (Aluno aluno) throws SQLException {
+    public void cursosMatriculados(Aluno aluno) throws SQLException {
         String sql = "SELECT curso.nome as curso_nome, curso.id as id_curso " +
-                    "FROM curso_aluno " +
-                    "JOIN curso on curso.id = curso_aluno.id_curso " +
-                    "WHERE curso_aluno.id_aluno = ? AND status_matricula = 'CURSANDO' "; 
-    
+                "FROM curso_aluno " +
+                "JOIN curso on curso.id = curso_aluno.id_curso " +
+                "WHERE curso_aluno.id_aluno = ? AND status_matricula = 'CURSANDO' ";
+
         PreparedStatement stm = conexao.prepareStatement(sql);
         stm.setInt(1, aluno.getid());
         ResultSet resultSet = stm.executeQuery();
@@ -265,8 +300,7 @@ public class CursoAlunoDao implements Dao<CursoAluno> {
 
             System.out.println(idCurso + " | " + nomeCurso);
         }
-    
-    }
 
+    }
 
 }

@@ -34,6 +34,7 @@ public class App {
             //professorTeste.cadastrarNotas(cursoAluno, 8.75);
 
             cursoTeste.porcentagemAprovados(cursoTeste);
+            cursoTeste.porcentagemReprovados(cursoTeste);
 
 
 

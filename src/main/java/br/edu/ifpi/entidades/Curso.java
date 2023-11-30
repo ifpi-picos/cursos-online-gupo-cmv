@@ -100,4 +100,9 @@ public class Curso {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.porcentagemAprovados(curso);
     }
+
+    public void porcentagemReprovados(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.porcentagemReprovados(curso);
+    }
 }
