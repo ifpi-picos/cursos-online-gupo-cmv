@@ -11,7 +11,6 @@ public class Professor {
     private String nome;
     private String email;
 
-    
     public Professor(int id, String nome, String email) {
         this.id = id;
         this.nome = nome;
@@ -45,7 +44,6 @@ public class Professor {
         this.email = email;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -55,5 +53,9 @@ public class Professor {
         professorDao.cursosMinistrados(professor);
     }
 
+    public void cadastrarNotas(CursoAluno cursoAluno, Double nota) throws SQLException {
+        ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
+        professorDao.cadastrarNotas(cursoAluno, nota);
+    }
 
 }
