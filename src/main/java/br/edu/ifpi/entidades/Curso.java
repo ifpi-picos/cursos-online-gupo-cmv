@@ -2,8 +2,10 @@ package br.edu.ifpi.entidades;
 
 import java.sql.SQLException;
 
+import br.edu.ifpi.dao.AlunoDao;
 import br.edu.ifpi.dao.Conexao;
 import br.edu.ifpi.dao.CursoAlunoDao;
+import br.edu.ifpi.dao.CursoDao;
 import br.edu.ifpi.enums.StatusCurso;
 
 public class Curso {
@@ -68,10 +70,9 @@ public class Curso {
         this.professor = professor;
     }
 
-    public void realizarMatricula(Aluno aluno) throws SQLException {
-        CursoAluno ca = new CursoAluno(this, aluno);
-        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
-        cursoAlunoDao.cadastrar(ca);
+    public void realizarMatriculaCurso(Aluno aluno) throws SQLException{
+       CursoDao cursoDao = new CursoDao(Conexao.getConnection());
+        cursoDao.matricularAlunonoCurso(aluno, this);
     }
 
     public void cancelarMatricula(Aluno aluno) throws SQLException {

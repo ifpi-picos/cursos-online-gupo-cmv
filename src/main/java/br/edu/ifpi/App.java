@@ -24,12 +24,14 @@ public class App {
             CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
 
 
-            Aluno alunoTeste = autenticacaoDao.autenticarAluno("gabriel@gmail.com");
-            Curso cursoTeste = autenticacaoDao.autenticarCurso("Java");
+            Aluno alunoTeste = autenticacaoDao.autenticarAluno("fernanda@gmail.com");
+            Curso cursoTeste = autenticacaoDao.autenticarCurso("geografia");
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
             CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste);
 
-        alunoTeste.realizarMatricula(cursoTeste);
+        cursoTeste.realizarMatriculaCurso(alunoTeste);
+
+
     
         
 

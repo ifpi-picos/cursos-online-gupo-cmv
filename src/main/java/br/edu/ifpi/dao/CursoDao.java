@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.ifpi.entidades.Aluno;
 import br.edu.ifpi.entidades.Curso;
 
 public class CursoDao implements Dao<Curso> {
@@ -141,19 +142,28 @@ public class CursoDao implements Dao<Curso> {
         return null;
     }
 
-    public void matricularAlunoEmCurso(int idAluno, int idCurso) {
-        String sql = "INSERT INTO curso_aluno (id_curso, id_aluno) VALUES (?, ?)";
+        public void matricularAlunonoCurso(Aluno aluno, Curso curso) {
+        String sql = "INSERT INTO curso_aluno (id_curso, id_aluno) VALUES (?,?)";
 
-        try (Connection connection = Conexao.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement stm = conexao.prepareStatement(sql);
 
-            statement.setInt(1, idCurso);
-            statement.setInt(2, idAluno);
+            stm.setInt(1, curso.getId());
+            stm.setInt(2, aluno.getid());
 
-            statement.executeUpdate();
+            int row = stm.executeUpdate();
+
+            System.out.println(row);
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao matricular aluno em curso", e);
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
+
     }
+
+
 }
