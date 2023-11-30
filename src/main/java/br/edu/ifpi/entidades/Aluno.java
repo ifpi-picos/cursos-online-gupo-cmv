@@ -1,6 +1,7 @@
 package br.edu.ifpi.entidades;
 import java.sql.SQLException;
 
+import br.edu.ifpi.dao.AlunoDao;
 import br.edu.ifpi.dao.Conexao;
 import br.edu.ifpi.dao.CursoAlunoDao;
 import br.edu.ifpi.enums.StatusAluno;
@@ -70,5 +71,9 @@ public class Aluno {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.perfilAluno(alunoTeste);
     }
-    
+
+    public void realizarMatricula(Curso curso) throws SQLException{
+        AlunoDao alunoDao = new AlunoDao(Conexao.getConnection());
+        alunoDao.matricularAluno(this,  curso);
+    }
 }

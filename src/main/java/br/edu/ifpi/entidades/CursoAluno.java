@@ -22,6 +22,10 @@ public class CursoAluno {
     }
 
 
+    public CursoAluno(Aluno aluno2, Aluno aluno3) {
+    }
+
+
     public Curso getCurso() {
         return curso;
     }
