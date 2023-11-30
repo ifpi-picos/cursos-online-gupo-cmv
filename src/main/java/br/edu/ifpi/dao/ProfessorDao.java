@@ -124,7 +124,7 @@ public class ProfessorDao implements Dao<Professor> {
   }
 
   public int cadastrarNotas(CursoAluno cursoAluno, Double nota) {
-    String sql = "UPDATE curso_aluno SET nota = ? WHERE id_aluno = ? AND id_curso = ?";
+    String sql = "UPDATE curso_aluno SET nota = ?, status_matricula = 'CONCLUIDO'  WHERE id_aluno = ? AND id_curso = ?";
 
     try {
       PreparedStatement stm = conexao.prepareStatement(sql);

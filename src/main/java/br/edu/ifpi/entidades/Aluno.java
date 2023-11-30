@@ -86,4 +86,9 @@ public class Aluno {
         cursoAlunoDao.cursosConcluido(this);
     }
 
+    public void cursosMatriculados(Aluno aluno) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        cursoAlunoDao.cursosMatriculados(this);
+    }
+
 }
