@@ -23,23 +23,6 @@ public class App {
             AutenticacaoDao autenticacaoDao = new AutenticacaoDao(Conexao.getConnection());
             CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
 
-
-            Aluno alunoTeste = autenticacaoDao.autenticarAluno("fernanda@gmail.com");
-            Curso cursoTeste = autenticacaoDao.autenticarCurso("geografia");
-            Aluno alunoTeste2 = autenticacaoDao.autenticarAluno("pvsales@gmail.com");
-            Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
-            CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste);
-
-       
-            //alunoTeste.cancelarMatricula(cursoTeste);
-            //alunoTeste.cursosConcluido(alunoTeste);
-            //alunoTeste2.cursosConcluido(alunoTeste2);
-
-
-
-    
-        
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

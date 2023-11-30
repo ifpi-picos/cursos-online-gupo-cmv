@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import br.edu.ifpi.dao.Conexao;
 import br.edu.ifpi.dao.CursoAlunoDao;
+import br.edu.ifpi.dao.CursoDao;
 import br.edu.ifpi.dao.ProfessorDao;
 
 public class Professor {
@@ -56,6 +57,11 @@ public class Professor {
     public void cadastrarNotas(CursoAluno cursoAluno, Double nota) throws SQLException {
         ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
         professorDao.cadastrarNotas(cursoAluno, nota);
+    }
+
+    public void cadastrarCurso(Curso curso) throws SQLException {
+        CursoDao cursoDao = new CursoDao(Conexao.getConnection());
+        cursoDao.cadastrar(curso);
     }
 
 }
