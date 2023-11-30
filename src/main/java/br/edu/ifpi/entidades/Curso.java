@@ -29,24 +29,22 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
         this.professor = professor;
     }
-    
+
     public int getId() {
         return id;
     }
-
 
     public String getNome() {
         return nome;
     }
 
     public String getStatusCurso() {
-        return this.status == StatusCurso.ABERTO? "ABERTO" : "FECHADO";
+        return this.status == StatusCurso.ABERTO ? "ABERTO" : "FECHADO";
     }
 
     public int getCargaHoraria() {
         return cargaHoraria;
     }
-
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -59,10 +57,11 @@ public class Curso {
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
+
     public void setId(int idCursoGerado) {
     }
-    
- public Professor getProfessor() {
+
+    public Professor getProfessor() {
         return professor;
     }
 
@@ -70,15 +69,16 @@ public class Curso {
         this.professor = professor;
     }
 
-    public void realizarMatriculaCurso(Aluno aluno) throws SQLException{
-       CursoDao cursoDao = new CursoDao(Conexao.getConnection());
-        cursoDao.matricularAlunonoCurso(aluno, this);
+    public void realizarMatriculaCurso(Aluno aluno) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        CursoAluno cursoAluno = new CursoAluno(this, aluno);
+        cursoAlunoDao.cadastrar(cursoAluno);
     }
 
-    public void cancelarMatricula(Aluno aluno) throws SQLException {
-        CursoAluno ca = new CursoAluno(this, aluno);
+    public void desmatricularAluno(Aluno aluno) throws SQLException {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
-        cursoAlunoDao.remover(ca);
+        CursoAluno cursoAluno = new CursoAluno(this, aluno);
+        cursoAlunoDao.remover(cursoAluno);
     }
 
     public void exibirTurma(Curso curso) throws SQLException {

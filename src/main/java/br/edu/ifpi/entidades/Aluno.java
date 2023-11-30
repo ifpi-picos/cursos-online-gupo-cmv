@@ -1,4 +1,5 @@
 package br.edu.ifpi.entidades;
+
 import java.sql.SQLException;
 
 import br.edu.ifpi.dao.AlunoDao;
@@ -12,21 +13,19 @@ public class Aluno {
     private String email;
     private StatusAluno status;
 
-    public Aluno(int idAluno ,String nome, String email, StatusAluno status) {
+    public Aluno(int idAluno, String nome, String email, StatusAluno status) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.email = email;
         this.status = status;
-       
-    }
 
+    }
 
     public Aluno(String nome, String email, StatusAluno status) {
         this.nome = nome;
         this.email = email;
         this.status = status;
     }
-
 
     public int getid() {
         return idAluno;
@@ -52,28 +51,34 @@ public class Aluno {
         this.email = email;
     }
 
-
     public String getStatus() {
-        return this.status == StatusAluno.ATIVO? "ATIVO" : "INATIVO";    
+        return this.status == StatusAluno.ATIVO ? "ATIVO" : "INATIVO";
     }
 
     public void setStatus(StatusAluno status) {
         this.status = status;
     }
 
-    public void gerarBoletim(Aluno aluno) throws SQLException{
+    public void gerarBoletim(Aluno aluno) throws SQLException {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.consultarBoletimAluno(aluno);
     }
-
 
     public void perfilAluno(Aluno alunoTeste) throws SQLException {
         CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
         cursoAlunoDao.perfilAluno(alunoTeste);
     }
 
-    public void realizarMatricula(Curso curso) throws SQLException{
-        AlunoDao alunoDao = new AlunoDao(Conexao.getConnection());
-        alunoDao.matricularAluno(this,  curso);
+    public void realizarMatricula(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        CursoAluno cursoAluno = new CursoAluno(curso, this);
+        cursoAlunoDao.cadastrar(cursoAluno);
     }
+
+    public void cancelarMatricula(Curso curso) throws SQLException {
+        CursoAlunoDao cursoAlunoDao = new CursoAlunoDao(Conexao.getConnection());
+        CursoAluno cursoAluno = new CursoAluno(curso, this);
+        cursoAlunoDao.remover(cursoAluno);
+    }
+
 }

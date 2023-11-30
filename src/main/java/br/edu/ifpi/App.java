@@ -29,7 +29,8 @@ public class App {
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
             CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste);
 
-        cursoTeste.realizarMatriculaCurso(alunoTeste);
+       
+       alunoTeste.cancelarMatricula(cursoTeste);
 
 
     

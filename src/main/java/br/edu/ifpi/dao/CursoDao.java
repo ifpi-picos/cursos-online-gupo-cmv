@@ -142,28 +142,6 @@ public class CursoDao implements Dao<Curso> {
         return null;
     }
 
-        public void matricularAlunonoCurso(Aluno aluno, Curso curso) {
-        String sql = "INSERT INTO curso_aluno (id_curso, id_aluno) VALUES (?,?)";
-
-        try {
-            PreparedStatement stm = conexao.prepareStatement(sql);
-
-            stm.setInt(1, curso.getId());
-            stm.setInt(2, aluno.getid());
-
-            int row = stm.executeUpdate();
-
-            System.out.println(row);
-
-        } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-    }
 
 
 }
