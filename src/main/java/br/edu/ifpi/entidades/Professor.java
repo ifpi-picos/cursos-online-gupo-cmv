@@ -64,4 +64,9 @@ public class Professor {
         cursoDao.cadastrar(curso);
     }
 
+    public void vizualizarCursosProfessores(Professor professor) throws SQLException {
+        ProfessorDao professorDao = new ProfessorDao(Conexao.getConnection());
+        professorDao.vizualizarCursosProfessores(professor);
+    }
+
 }

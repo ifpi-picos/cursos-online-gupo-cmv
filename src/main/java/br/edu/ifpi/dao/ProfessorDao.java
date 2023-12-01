@@ -182,4 +182,32 @@ public class ProfessorDao implements Dao<Professor> {
     return cursos;
   }
 
+  public void vizualizarCursosProfessores(Professor professor) {
+    String sql = "SELECT curso.nome as curso_nome, professor.nome as professor_nome " +
+        "FROM curso " +
+        "INNER JOIN professor ON curso.id_professor = professor.id " +
+        "WHERE professor.nome = ?"; 
+
+    try {
+      PreparedStatement stm = conexao.prepareStatement(sql);
+      stm.setString(1, professor.getNome());
+
+      java.sql.ResultSet resultSet = stm.executeQuery();
+
+      System.out.println("\n----- Lista de Professores e seus Cursos -----");
+      while (resultSet.next()) {
+        String nomeCurso = resultSet.getString("curso_nome");
+        String nomeProfessor = resultSet.getString("professor_nome");
+
+        System.out.println(nomeCurso + " | " + nomeProfessor);
+      }
+    } catch (SQLException e) {
+      System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    }
+  }
+
 }

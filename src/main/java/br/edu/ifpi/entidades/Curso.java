@@ -30,6 +30,9 @@ public class Curso {
         this.professor = professor;
     }
 
+    public Curso(String nomeCurso, String nomeProfessor) {
+    }
+
     public int getId() {
         return id;
     }
