@@ -31,11 +31,7 @@ public class App {
             CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste2);
 
 
-            //professorTeste.cadastrarNotas(cursoAluno, 8.75);
-
-            //cursoTeste.porcentagemAprovados(cursoTeste);
-            //cursoTeste.porcentagemReprovados(cursoTeste);
-            professorTeste.vizualizarCursosProfessores(professorTeste);
+         
 
 
 

@@ -199,7 +199,7 @@ public class ProfessorDao implements Dao<Professor> {
         String nomeCurso = resultSet.getString("curso_nome");
         String nomeProfessor = resultSet.getString("professor_nome");
 
-        System.out.println(nomeCurso + " | " + nomeProfessor);
+        System.out.println("| " + nomeProfessor + " | " + nomeCurso);
       }
     } catch (SQLException e) {
       System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
