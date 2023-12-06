@@ -30,9 +30,37 @@ public class App {
             Professor professorTeste = autenticacaoDao.autenticarProfessor("vianajesiel@gmail.com");
             CursoAluno cursoAluno = new CursoAluno(cursoTeste, alunoTeste2);
 
+            //System.out.println("---------ALUNOS-----------");
+            //alunoDao.consultar();
+            //alunoDao.alterar(alunoTeste3);
+            //alunoDao.cadastrar(alunoTeste3);
+            //System.out.println("--------------------------");
 
-         
+            //System.out.println("-----------PROFESSORES-------------");
+            //professorDao.alterar(professorTeste);
+            //professorDao.cadastrar(professorTeste);
+            //professorDao.cadastrarNotas(cursoAluno, null);
+            //professorDao.consultar();
+            //professorDao.cursosMinistrados(professorTeste);
+            //professorDao.remover(professorTeste);
+            //System.out.println("----------------------------------");
 
+            //System.out.println("-------------CURSO------------");
+            //cursoDao.consultarCursosAbertos();
+            //cursoAlunoDao.cursosConcluido(alunoTeste2);
+            //cursoAlunoDao.consultarBoletimAluno(alunoTeste2);
+            //cursoAlunoDao.cursosConcluido(alunoTeste3);
+            //cursoAlunoDao.cursosMatriculados(alunoTeste3);
+            //cursoAlunoDao.remover(cursoAluno);
+            //cursoAlunoDao.alterar(cursoAluno);
+            //cursoAlunoDao.mediaALunos(cursoTeste);
+            //cursoAlunoDao.porcentagemAprovados(cursoTeste);
+            //cursoAlunoDao.quantidadeAlunosPorCurso(cursoTeste);
+            //cursoAlunoDao.porcentagemReprovados(cursoTeste);
+            //cursoAlunoDao.perfilAluno(alunoTeste3);
+            //System.out.println("-----------------------------");
+
+            //SE ESTIVER FALTANDO ALGUM PERDAO...
 
 
 
